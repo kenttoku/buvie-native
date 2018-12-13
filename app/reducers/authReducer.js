@@ -14,14 +14,11 @@ const initialState = {
 };
 
 export default function reducer(state = initialState, action) {
-  if (action.type === SET_AUTH_TOKEN) {
+  if (action.type === CLEAR_AUTH) {
+    return initialState
+  } else if (action.type === SET_AUTH_TOKEN) {
     return Object.assign({}, state, {
       authToken: action.authToken
-    });
-  } else if (action.type === CLEAR_AUTH) {
-    return Object.assign({}, state, {
-      authToken: null,
-      currentUser: null
     });
   } else if (action.type === AUTH_REQUEST) {
     return Object.assign({}, state, {

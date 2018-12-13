@@ -1,5 +1,4 @@
 import authReducer from './authReducer';
+import userReducer from './userReducer';
 
-console.log(authReducer)
-
-export { authReducer }
+export { authReducer, userReducer }
