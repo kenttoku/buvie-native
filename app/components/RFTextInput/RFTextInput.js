@@ -5,10 +5,14 @@ import styles from './styles';
 const RFTextInput = ({
   input: { onBlur, onChange, onFocus, value },
   meta: { error, touched, valid },
-  disabled
+  disabled,
+  secureTextEntry,
+  textContentType
 }) => (
   <View>
     <TextInput
+      textContentType={textContentType}
+      secureTextEntry={secureTextEntry}
       editable={!disabled}
       selectTextOnFocus={!disabled}
       onBlur={onBlur}

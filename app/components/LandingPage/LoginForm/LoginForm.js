@@ -1,19 +1,11 @@
 import React, { Component } from 'react';
 import LoginFormRF from './LoginFormRF';
-
-
-const wait = () => new Promise((resolve) => {
-  setTimeout(() => {
-    resolve();
-  }, 3000);
-});
-
+import { login } from '../../../actions'
+import { connect } from 'react-redux'
 
 class LoginForm extends Component {
   handleSubmit = async ({ username, password }) => {
-    await wait();
-    console.log(`username: ${username}`);
-    console.log(`password: ${password}`);
+    await this.props.dispatch(login(username, password));
   }
 
   render() {
@@ -21,4 +13,4 @@ class LoginForm extends Component {
   }
 }
 
-export default LoginForm;
+export default connect()(LoginForm);

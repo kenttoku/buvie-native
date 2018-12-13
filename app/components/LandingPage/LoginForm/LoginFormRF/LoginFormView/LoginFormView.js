@@ -16,11 +16,14 @@ const LoginFormView = ({
       name="username"
       component={RFTextView}
       disabled={submitting}
+      textContentType="username"
     />
     <Field
       name="password"
       component={RFTextView}
       disabled={submitting}
+      secureTextEntry={true}
+      textContentType="password"
     />
     {!submitting && submitFailed && <Text style={styles.rootFailed}>Submit Failed</Text>}
     {!submitting && submitSucceeded && <Text style={styles.rootSucceeded}>Submit Succeeded</Text>}
