@@ -34,6 +34,18 @@ import {
   registerUser
 } from './userActions'
 
+import {
+  fetchMovies,
+  fetchMoviesRequest,
+  FETCH_MOVIES_REQUEST,
+  fetchMoviesSuccess,
+  FETCH_MOVIES_SUCCESS,
+  fetchMoviesFailure,
+  FETCH_MOVIES_FAILURE,
+  resetMovies,
+  RESET_MOVIES
+} from './movieActions'
+
 export {
   // Auth Actions
   login,
@@ -66,5 +78,15 @@ export {
   UPDATE_USER_SUCCESS,
   updateUserFailure,
   UPDATE_USER_FAILURE,
-  registerUser
+  registerUser,
+  // Movie Actions
+  fetchMovies,
+  fetchMoviesRequest,
+  FETCH_MOVIES_REQUEST,
+  fetchMoviesSuccess,
+  FETCH_MOVIES_SUCCESS,
+  fetchMoviesFailure,
+  FETCH_MOVIES_FAILURE,
+  resetMovies,
+  RESET_MOVIES
 }
