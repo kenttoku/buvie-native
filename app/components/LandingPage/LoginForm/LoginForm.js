@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
 import LoginFormRF from './LoginFormRF';
 
+
+const wait = () => new Promise((resolve) => {
+  setTimeout(() => {
+    resolve();
+  }, 3000);
+});
+
+
 class LoginForm extends Component {
-  handleSubmit = ({ username, password }) => {
+  handleSubmit = async ({ username, password }) => {
+    await wait();
     console.log(`username: ${username}`);
     console.log(`password: ${password}`);
   }
