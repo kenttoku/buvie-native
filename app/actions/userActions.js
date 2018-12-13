@@ -96,6 +96,77 @@ export const updateUser = data => (dispatch, getState) => {
     .catch(err => updateUserFailure());
 };
 
+export const FETCH_MATCHES_REQUEST = 'FETCH_MATCHES_REQUEST';
+export const fetchMatchesRequest = () => ({
+  type: FETCH_MATCHES_REQUEST
+});
+
+export const FETCH_MATCHES_SUCCESS = 'FETCH_MATCHES_SUCCESS';
+export const fetchMatchesSuccess = matches => ({
+  type: FETCH_MATCHES_SUCCESS,
+  matches
+});
+
+export const FETCH_MATCHES_FAILURE = 'FETCH_MATCHES_FAILURE';
+export const fetchMatchesFailure = error => ({
+  type: FETCH_MATCHES_FAILURE,
+  error
+});
+
+export const fetchMatches = () => (dispatch, getState) => {
+  dispatch(fetchMatchesRequest());
+  const authToken = getState().auth.authToken;
+
+  return fetch(`${API_BASE_URL}/main/`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${authToken}`
+    }
+  })
+    .then(res => res.json())
+    .then(res => {
+      dispatch(fetchMatchesSuccess(res));
+    })
+    .catch(err => dispatch(fetchMatchesFailure(err)));
+};
+
+
+export const POPCORN_USER_REQUEST = 'POPCORN_USER_REQUEST';
+export const popcornUserRequest = () => ({
+  type: POPCORN_USER_REQUEST
+});
+
+export const POPCORN_USER_SUCCESS = 'POPCORN_USER_SUCCESS';
+export const popcornUserSuccess = matches => ({
+  type: POPCORN_USER_SUCCESS,
+  matches
+});
+
+export const POPCORN_USER_FAILURE = 'POPCORN_USER_FAILURE';
+export const popcornUserFailure = error => ({
+  type: POPCORN_USER_FAILURE,
+  error
+});
+
+export const popcornUser = userId => (dispatch, getState) => {
+  dispatch(popcornUserRequest())
+  const authToken = getState().auth.authToken;
+
+  return fetch(`${API_BASE_URL}/main/popcorn`, {
+    method: 'PUT',
+    headers: {
+      'content-type': 'application/json',
+      Authorization: `Bearer ${authToken}`
+    },
+    body: JSON.stringify(userId)
+  })
+    .then(res => {
+      console.log(res);
+      dispatch(popcornUserSuccess())
+    })
+    .catch(err => dispatch(popcornUserFailure(err)));
+};
+
 export const registerUser = user => () => {
   console.log(user)
   return fetch(`${API_BASE_URL}/users`, {

@@ -8,7 +8,7 @@ import LoginForm from './LoginForm';
 
 class LandingPage extends Component {
   state = {
-    activeForm: 'registration'
+    activeForm: 'login'
   }
 
   toggleForm() {

@@ -1,19 +1,30 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { Button, Image, Text, View } from 'react-native';
 import { connect } from 'react-redux'
-import { fetchCurrentuser } from '../../actions';
+import md5 from 'js-md5';
+
+import { fetchCurrentuser, fetchMatches, popcornUser } from '../../actions';
 import MovieSelection from './MovieSelection';
 import GenreSelection from './GenreSelection';
 
 export class DashboardPage extends Component {
   componentDidMount() {
     this.props.dispatch(fetchCurrentuser())
+      .then(() => this.props.dispatch(fetchMatches()))
+  }
+
+  popcorn(userId) {
+    console.log('popcorning', userId)
+    this.props.dispatch(popcornUser({ userId }))
+  }
+
+  ignore(userId) {
+    console.log('ignoring ', userId)
   }
 
   render() {
-    const { genres, movies } = this.props
+    const { genres, movies, matches, filter } = this.props
     console.log(this.props)
-    console.log(genres)
     if (!genres.length) {
       return <GenreSelection />;
     }
@@ -22,10 +33,37 @@ export class DashboardPage extends Component {
       return <MovieSelection />;
     }
 
+    const matchesList = matches
+    .filter(user => !filter.includes(user.id))
+    .map(user => {
+      let uri = `https://www.gravatar.com/avatar/${md5(
+        user.email
+      )}?d=retro`;
+
+      return (
+        <React.Fragment key={user.id}>
+          <Image
+            style={{width: 50, height: 50}}
+            source={{ uri }}
+          />
+          <Text >{user.username}</Text>
+          <Button
+            title="Popcorn"
+            onPress={() => this.popcorn(user.id)}
+          />
+          <Button
+            title="Ignore"
+            onPress={() => this.ignore(user.id)}
+          />
+        </React.Fragment>
+      );
+    });
+
     console.log(this.props)
     return (
       <View>
-        <Text>This is the Dashboard</Text>
+        <Text>You Matched with:</Text>
+        {matchesList[0] ? matchesList[0] : <Text>Nobody</Text>}
       </View>
     )
   }

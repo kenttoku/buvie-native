@@ -7,67 +7,30 @@ export class GenreSelection extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      genres: [],
-      'Action & Adventure': false,
-      'Children & Family': false,
-      'Comedy': false,
-      'Documentary': false,
-      'Drama': false,
-      'International': false,
-      'Horror': false,
-      'SciFi & Fantasy': false,
-      'Thriller': false,
-      count: 0
+      genres: []
     }
   }
 
   toggleSelected(genre) {
-    let change = 0;
-    if (this.state[genre]) {
-      change--;
+    if (!this.state.genres.includes(genre)) {
+      this.setState({
+        genres: [...this.state.genres, genre]
+      });
     } else {
-      change++
+      this.setState({
+        genres: this.state.genres.filter(listGenre => listGenre !== genre)
+      });
     }
-    this.setState({
-      [genre] : !this.state[genre],
-      count: this.state.count + change
-    })
   }
 
   handleSubmit() {
-    const genres = []
-    if (this.state['Action & Adventure']) {
-      genres.push('Action & Adventure')
-    }
-    if (this.state['Children & Family']) {
-      genres.push('Children & Family')
-    }
-    if (this.state['Comedy']) {
-      genres.push('Comedy')
-    }
-    if (this.state['Documentary']) {
-      genres.push('Documentary')
-    }
-    if (this.state['Drama']) {
-      genres.push('Drama')
-    }
-    if (this.state['Horror']) {
-      genres.push('Horror')
-    }
-    if (this.state['International']) {
-      genres.push('International')
-    }
-    if (this.state['SciFi & Fantasy']) {
-      genres.push('SciFi & Fantasy')
-    }
-    if (this.state['Thriller']) {
-      genres.push('Thriller')
-    }
-
+    const {genres} = this.state;
     this.props.dispatch(updateUser({genres}))
   }
 
   render() {
+    const { genres } = this.state;
+
     const genreList = [
       { name: 'Action & Adventure', id: 'action' },
       { name: 'Children & Family', id: 'family' },
@@ -85,9 +48,9 @@ export class GenreSelection extends Component {
         <React.Fragment key={genre.id}>
           <Text>{genre.name}</Text>
           <Switch
-            disabled={this.state.count >= 3 && !this.state[genre.name]}
+            disabled={genres.length >= 3 && !genres.includes(genre.name)}
             onValueChange={() => this.toggleSelected(genre.name)}
-            value={this.state[genre.name]}
+            value={genres.includes(genre.name)}
           />
         </React.Fragment>);
     });
@@ -95,10 +58,10 @@ export class GenreSelection extends Component {
     return (
       <View>
         <Text> Please choose 3 genres </Text>
-        <Text> {this.state.count} of 3 selected </Text>
+        <Text> {genres.length} of 3 selected </Text>
         {inputs}
         <Button
-          disabled={this.state.count != 3}
+          disabled={genres.length != 3}
           title="Continue"
           onPress={() => this.handleSubmit()}
         />
