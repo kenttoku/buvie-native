@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import { Provider } from 'react-redux';
 
-import LandingPage from './components/landing-page'
+import LandingPage from './components/LandingPage'
 import store from './store';
 
 const instructions = Platform.select({
