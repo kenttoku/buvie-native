@@ -5,7 +5,7 @@ export default class MovieSelection extends Component {
   render() {
     return (
       <View>
-        <Text> textInComponent </Text>
+        <Text> MovieSelection </Text>
       </View>
     )
   }

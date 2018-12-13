@@ -13,6 +13,10 @@ import {
 } from './authActions'
 
 import {
+  setGenres,
+  SET_GENRES,
+  setMovies,
+  SET_MOVIES,
   fetchCurrentuser,
   fetchCurrentuserRequest,
   FETCH_CURRENT_USER_REQUEST,
@@ -20,6 +24,14 @@ import {
   FETCH_CURRENT_USER_SUCCESS,
   fetchCurrentuserFailure,
   FETCH_CURRENT_USER_FAILURE,
+  updateUser,
+  updateUserRequest,
+  UPDATE_USER_REQUEST,
+  updateUserSuccess,
+  UPDATE_USER_SUCCESS,
+  updateUserFailure,
+  UPDATE_USER_FAILURE,
+  registerUser
 } from './userActions'
 
 export {
@@ -36,6 +48,10 @@ export {
   authError,
   AUTH_ERROR,
   // User Actions
+  setGenres,
+  SET_GENRES,
+  setMovies,
+  SET_MOVIES,
   fetchCurrentuser,
   fetchCurrentuserRequest,
   FETCH_CURRENT_USER_REQUEST,
@@ -43,4 +59,12 @@ export {
   FETCH_CURRENT_USER_SUCCESS,
   fetchCurrentuserFailure,
   FETCH_CURRENT_USER_FAILURE,
+  updateUser,
+  updateUserRequest,
+  UPDATE_USER_REQUEST,
+  updateUserSuccess,
+  UPDATE_USER_SUCCESS,
+  updateUserFailure,
+  UPDATE_USER_FAILURE,
+  registerUser
 }

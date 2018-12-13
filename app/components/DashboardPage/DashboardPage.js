@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 import { connect } from 'react-redux'
 import { fetchCurrentuser } from '../../actions';
 import MovieSelection from './MovieSelection';
+import GenreSelection from './GenreSelection';
 
 export class DashboardPage extends Component {
   componentDidMount() {
@@ -10,14 +11,21 @@ export class DashboardPage extends Component {
   }
 
   render() {
-    const { genres } = this.props
+    const { genres, movies } = this.props
+    console.log(this.props)
+    console.log(genres)
+    if (!genres.length) {
+      return <GenreSelection />;
+    }
 
+    if (!movies.length) {
+      return <MovieSelection />;
+    }
 
     console.log(this.props)
     return (
       <View>
         <Text>This is the Dashboard</Text>
-        <MovieSelection />
       </View>
     )
   }
