@@ -32,6 +32,7 @@ const StyledTextInput = styled.TextInput`
 
 const StyledView = styled.View`
   width: 100%;
+
 `;
 
 const StyledLabel = styled.Text`
@@ -41,8 +42,8 @@ const StyledLabel = styled.Text`
 
 const StyledError = styled.Text`
   color: red;
+  margin-top: 24;
 `;
-
 
 const RFTextInput = ({
   input: { onBlur, onChange, onFocus, value },

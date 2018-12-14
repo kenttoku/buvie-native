@@ -15,16 +15,28 @@ const StyledSuccessText = styled.Text`
   text-align: center;
 `;
 
-const StyledLogo = styled.Image`
-  margin-top: 64;
-  margin-bottom: 200;
-`;
-
 const StyledView = styled.View`
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
+
+const StyledButtonContainer = styled.TouchableOpacity`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #A33944;
+  opacity: ${props => props.disabled ? '0.5' : '1'};
+  margin-top: 16px;
+  width: 200;
+  height: 48;
+`;
+
+const StyledButtonText = styled.Text`
+  color: #fff;
+  font-size: 20;
+`;
+
 
 const LoginFormView = ({
   handleSubmit,
@@ -34,7 +46,6 @@ const LoginFormView = ({
   valid
 }) => (
   <StyledView>
-    <StyledLogo source={require('../../../../../assets/images/buvie.gif')} />
     <Field
       name="username"
       placeholder="Username"
@@ -52,11 +63,11 @@ const LoginFormView = ({
     />
     {!submitting && submitFailed && <StyledFailedText>Submit Failed</StyledFailedText>}
     {!submitting && submitSucceeded && <StyledSuccessText>Submit Succeeded</StyledSuccessText>}
-    <Button
+    <StyledButtonContainer
       disabled={!valid || submitting}
-      title="Log in"
-      onPress={handleSubmit}
-    />
+      onPress={handleSubmit}>
+      <StyledButtonText>Log in</StyledButtonText>
+    </StyledButtonContainer>
   </StyledView>
 );
 

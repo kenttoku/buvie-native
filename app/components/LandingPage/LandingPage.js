@@ -1,10 +1,34 @@
 import React, { Component } from 'react';
-import { Button, View } from 'react-native';
+import { Text, TouchableOpacity, Button, View } from 'react-native';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-native';
+import styled from 'styled-components/native';
 
 import RegistrationForm from './RegistrationForm';
 import LoginForm from './LoginForm';
+
+const StyledLogo = styled.Image`
+  margin-top: 64;
+  margin-bottom: 100;
+`;
+
+const StyledView = styled.View`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const StyledFormContainer = styled.View`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const StyledButtonText = styled.Text`
+  font-size: 20;
+  color: #fff;
+`;
 
 class LandingPage extends Component {
   constructor(props) {
@@ -30,14 +54,28 @@ class LandingPage extends Component {
 
     const { activeForm } = this.state;
     return (
-      <View>
-        {activeForm === 'registration' && <RegistrationForm />}
-        {activeForm === 'login' && <LoginForm />}
-        <Button
-          title="Toggle Form"
+      <StyledView>
+        <StyledFormContainer>
+
+          <StyledLogo source={require('../../assets/images/buvie.gif')} />
+          {activeForm === 'registration' && <RegistrationForm />}
+          {activeForm === 'login' && <LoginForm />}
+        </StyledFormContainer>
+
+        {activeForm === 'registration' &&
+        <TouchableOpacity
           onPress={() => this.toggleForm()}
-        />
-      </View>
+        >
+          <StyledButtonText>Already a member? Login</StyledButtonText>
+        </TouchableOpacity>}
+
+        {activeForm === 'login' &&
+        <TouchableOpacity
+          onPress={() => this.toggleForm()}
+        >
+          <StyledButtonText>Not a member? Sign Up</StyledButtonText>
+        </TouchableOpacity>}
+      </StyledView>
     );
   }
 }
