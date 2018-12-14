@@ -1,35 +1,18 @@
 import React from 'react';
-import styled from 'styled-components/native';
 import { Field } from 'redux-form';
 import RFTextView from '../../../../RFTextInput';
 import StyledButtonContainer from '../../../../styles/StyledButtonContainer'
 import StyledButtonText from '../../../../styles/StyledButtonText'
-
-const StyledFailedText = styled.Text`
-  color: red;
-  text-align: center;
-  font-size: 40;
-`;
-
-const StyledSuccessText = styled.Text`
-  color: green;
-  text-align: center;
-`;
-
-const StyledView = styled.View`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
+import StyledFormView from '../../../../styles/StyledFormView'
+import StyledFailedText from '../../../../styles/StyledFailedText'
 
 const LoginFormView = ({
   handleSubmit,
   submitFailed,
-  submitSucceeded,
   submitting,
   valid
 }) => (
-  <StyledView>
+  <StyledFormView>
     <Field
       name="username"
       placeholder="Username"
@@ -45,14 +28,13 @@ const LoginFormView = ({
       secureTextEntry={true}
       textContentType="password"
     />
-    {!submitting && submitFailed && <StyledFailedText>Submit Failed</StyledFailedText>}
-    {!submitting && submitSucceeded && <StyledSuccessText>Submit Succeeded</StyledSuccessText>}
+    {!submitting && submitFailed && <StyledFailedText>Invalid username or password</StyledFailedText>}
     <StyledButtonContainer
       disabled={!valid || submitting}
       onPress={handleSubmit}>
       <StyledButtonText>Log in</StyledButtonText>
     </StyledButtonContainer>
-  </StyledView>
+  </StyledFormView>
 );
 
 export default LoginFormView;
