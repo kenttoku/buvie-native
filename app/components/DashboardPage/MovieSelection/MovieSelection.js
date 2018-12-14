@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Button, Image, Switch, Text, View } from 'react-native'
 import { connect } from 'react-redux'
 
-import { fetchMovies, updateUser } from '../../../actions'
+import { fetchMovies, updateUser, fetchCurrentuser, fetchMatches } from '../../../actions'
 
 export class MovieSelection extends Component {
   constructor(props) {
@@ -31,6 +31,8 @@ export class MovieSelection extends Component {
   handleSubmit() {
     const { movies } = this.state;
     this.props.dispatch(updateUser({ movies }))
+      .then(() => this.props.dispatch(fetchCurrentuser()))
+      .then(() => this.props.dispatch(fetchMatches()))
   }
 
   render() {
