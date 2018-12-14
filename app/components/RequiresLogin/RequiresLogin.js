@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Text, View } from 'react-native'
+import { Text, View } from 'react-native';
 import { Redirect } from 'react-router-native';
 
 export default () => Component => {

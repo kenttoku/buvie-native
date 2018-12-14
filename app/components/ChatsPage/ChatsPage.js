@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { Text, View } from 'react-native'
-import { connect } from 'react-redux'
+import React, { Component } from 'react';
+import { Text, View } from 'react-native';
+import { connect } from 'react-redux';
 
 import Navigation from '../Navigation';
 import RequiresLogin from '../RequiresLogin';
@@ -12,8 +12,8 @@ export class ChatsPage extends Component {
         <Text> Chats Page </Text>
         <Navigation />
       </View>
-    )
+    );
   }
 }
 
-export default RequiresLogin()(connect()(ChatsPage))
+export default RequiresLogin()(connect()(ChatsPage));

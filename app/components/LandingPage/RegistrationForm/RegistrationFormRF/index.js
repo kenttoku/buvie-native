@@ -1,3 +1,3 @@
-import RegistrationFormRF from './RegistrationFormRF'
+import RegistrationFormRF from './RegistrationFormRF';
 
 export default RegistrationFormRF;

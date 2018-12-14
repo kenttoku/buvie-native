@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import { Button, Image, Switch, Text, View } from 'react-native'
-import { connect } from 'react-redux'
+import React, { Component } from 'react';
+import { Button, Image, Switch, Text, View } from 'react-native';
+import { connect } from 'react-redux';
 
-import { fetchMovies, updateUser, fetchCurrentuser, fetchMatches } from '../../../actions'
+import { fetchMovies, updateUser, fetchCurrentuser, fetchMatches } from '../../../actions';
 
 export class MovieSelection extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ export class MovieSelection extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(fetchMovies())
+    this.props.dispatch(fetchMovies());
   }
 
   toggleSelected(movie) {
@@ -32,24 +32,24 @@ export class MovieSelection extends Component {
     const { movies } = this.state;
     this.props.dispatch(updateUser({ movies }))
       .then(() => this.props.dispatch(fetchCurrentuser()))
-      .then(() => this.props.dispatch(fetchMatches()))
+      .then(() => this.props.dispatch(fetchMatches()));
   }
 
   render() {
     const { movies } = this.props;
-    console.log(this.state.movies)
+    console.log(this.state.movies);
 
     // TODO: Use images instead of text for choosing movies
     const input = movies.map(movie => {
       return (
-      <React.Fragment key={movie.id}>
-        <Text>{movie.title}</Text>
-        <Switch
-          onValueChange={() => this.toggleSelected(movie.id)}
-          value={this.state.movies.includes(movie.id)}
-        />
-      </React.Fragment>);
-    })
+        <React.Fragment key={movie.id}>
+          <Text>{movie.title}</Text>
+          <Switch
+            onValueChange={() => this.toggleSelected(movie.id)}
+            value={this.state.movies.includes(movie.id)}
+          />
+        </React.Fragment>);
+    });
 
     return (
       <View>
@@ -60,7 +60,7 @@ export class MovieSelection extends Component {
           onPress={() => this.handleSubmit()}
         />
       </View>
-    )
+    );
   }
 }
 
@@ -69,4 +69,4 @@ const mapStateToProps = state => ({
   movies: state.movie.list
 });
 
-export default connect(mapStateToProps)(MovieSelection)
+export default connect(mapStateToProps)(MovieSelection);

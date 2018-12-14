@@ -17,8 +17,8 @@ const validate = ({ username, password }) => {
     errors.password = 'Must not be blank';
   }
 
-  return errors
-}
+  return errors;
+};
 
 const RegistrationFormRF = reduxForm({
   form: FORM,

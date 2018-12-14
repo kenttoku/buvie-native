@@ -7,22 +7,25 @@ import RegistrationForm from './RegistrationForm';
 import LoginForm from './LoginForm';
 
 class LandingPage extends Component {
-  state = {
-    activeForm: 'login'
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeForm: 'login'
+    };
   }
 
   toggleForm() {
-    let activeForm = 'login'
+    let activeForm = 'login';
     if (this.state.activeForm === 'login') {
-      activeForm = 'registration'
+      activeForm = 'registration';
     }
-    this.setState({activeForm})
+    this.setState({ activeForm });
   }
 
   render() {
     const { loggedIn } = this.props;
     if (loggedIn) {
-      return <Redirect to="/dashboard" />
+      return <Redirect to="/dashboard" />;
     }
 
     const { activeForm } = this.state;
@@ -41,6 +44,6 @@ class LandingPage extends Component {
 
 const mapStateToProps = state => ({
   loggedIn: !!state.auth.currentUser
-})
+});
 
-export default connect(mapStateToProps)(LandingPage)
+export default connect(mapStateToProps)(LandingPage);

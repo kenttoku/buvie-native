@@ -90,11 +90,11 @@ export const updateUser = data => (dispatch, getState) => {
   })
     .then(res => res.json())
     .then(res => {
-      dispatch(updateUserSuccess())
+      dispatch(updateUserSuccess());
       dispatch(setGenres(res.genres));
       dispatch(setMovies(res.movies));
     })
-    .catch(err => updateUserFailure());
+    .catch(err => updateUserFailure(err));
 };
 
 export const FETCH_MATCHES_REQUEST = 'FETCH_MATCHES_REQUEST';
@@ -150,7 +150,7 @@ export const popcornUserFailure = error => ({
 });
 
 export const popcornUser = userId => (dispatch, getState) => {
-  dispatch(popcornUserRequest())
+  dispatch(popcornUserRequest());
   const authToken = getState().auth.authToken;
 
   return fetch(`${API_BASE_URL}/main/popcorn`, {
@@ -162,7 +162,7 @@ export const popcornUser = userId => (dispatch, getState) => {
     body: JSON.stringify(userId)
   })
     .then(res => {
-      dispatch(popcornUserSuccess())
+      dispatch(popcornUserSuccess());
     })
     .catch(err => dispatch(popcornUserFailure(err)));
 };
@@ -175,8 +175,7 @@ export const ignoreUserRequest = () => ({
 
 export const IGNORE_USER_SUCCESS = 'IGNORE_USER_SUCCESS';
 export const ignoreUserSuccess = () => ({
-  type: IGNORE_USER_SUCCESS,
-  matched
+  type: IGNORE_USER_SUCCESS
 });
 
 export const IGNORE_USER_FAILURE = 'IGNORE_USER_FAILURE';
@@ -199,7 +198,6 @@ export const ignoreUser = userId => (dispatch, getState) => {
     body: JSON.stringify({ userId })
   })
     .then(() => {
-      console.log('success')
       dispatch(ignoreUserSuccess());
     })
     .catch(err => dispatch(ignoreUserFailure(err)));

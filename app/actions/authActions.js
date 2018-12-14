@@ -34,14 +34,12 @@ export const authError = error => ({
 
 const storeAuthInfo = (authToken, dispatch) => {
   const decodedToken = jwtDecode(authToken);
-  console.log(decodedToken)
   dispatch(setAuthToken(authToken));
   dispatch(authSuccess(decodedToken.user));
   // saveAuthToken(authToken);
 };
 
 export const login = (username, password) => dispatch => {
-  console.log('username: ', username)
   dispatch(authRequest());
   return (
     fetch(`${API_BASE_URL}/auth/login`, {

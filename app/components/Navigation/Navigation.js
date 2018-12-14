@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import React, { Component } from 'react';
+import { Text, View } from 'react-native';
 import { Link } from 'react-router-native';
 
 export default class Navigation extends Component {
@@ -11,6 +11,6 @@ export default class Navigation extends Component {
         <Link to="/popcorns"><Text>Popcorns</Text></Link>
         <Link to="/chats"><Text>Chats</Text></Link>
       </View>
-    )
+    );
   }
 }

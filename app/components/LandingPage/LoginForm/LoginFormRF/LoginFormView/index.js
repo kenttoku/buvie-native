@@ -1,3 +1,3 @@
-import LoginFormView from './LoginFormView'
+import LoginFormView from './LoginFormView';
 
 export default LoginFormView;

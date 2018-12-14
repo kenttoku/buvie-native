@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Image, Text, View } from 'react-native';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import md5 from 'js-md5';
 
 import { fetchCurrentuser, fetchMatches, popcornUser, ignoreUser, filterUser } from '../../actions';
@@ -12,24 +12,24 @@ import RequiresLogin from '../RequiresLogin/RequiresLogin';
 export class DashboardPage extends Component {
   componentDidMount() {
     this.props.dispatch(fetchCurrentuser())
-      .then(() => this.props.dispatch(fetchMatches()))
+      .then(() => this.props.dispatch(fetchMatches()));
   }
 
   popcorn(userId) {
     this.props.dispatch(popcornUser({ userId }))
       .then(() => this.props.dispatch(fetchCurrentuser()))
-      .then(() => this.props.dispatch(fetchMatches()))
+      .then(() => this.props.dispatch(fetchMatches()));
   }
 
   ignore(userId) {
     this.props.dispatch(ignoreUser({ userId }))
       .then(() => this.props.dispatch(filterUser(userId)))
       .then(() => this.props.dispatch(fetchCurrentuser()))
-      .then(() => this.props.dispatch(fetchMatches()))
+      .then(() => this.props.dispatch(fetchMatches()));
   }
 
   render() {
-    const { genres, movies, matches, filter, loading } = this.props
+    const { genres, movies, matches, filter, loading } = this.props;
 
     // if (loading) {
     //   return <Image
@@ -46,30 +46,30 @@ export class DashboardPage extends Component {
     }
 
     const matchesList = matches
-    .filter(user => !filter.includes(user.id))
-    .map(user => {
-      let uri = `https://www.gravatar.com/avatar/${md5(
-        user.email
-      )}?d=retro`;
+      .filter(user => !filter.includes(user.id))
+      .map(user => {
+        let uri = `https://www.gravatar.com/avatar/${md5(
+          user.email
+        )}?d=retro`;
 
-      return (
-        <React.Fragment key={user.id}>
-          <Image
-            style={{width: 50, height: 50}}
-            source={{ uri }}
-          />
-          <Text >{user.username}</Text>
-          <Button
-            title="Popcorn"
-            onPress={() => this.popcorn(user.id)}
-          />
-          <Button
-            title="Ignore"
-            onPress={() => this.ignore(user.id)}
-          />
-        </React.Fragment>
-      );
-    });
+        return (
+          <React.Fragment key={user.id}>
+            <Image
+              style={{ width: 50, height: 50 }}
+              source={{ uri }}
+            />
+            <Text >{user.username}</Text>
+            <Button
+              title="Popcorn"
+              onPress={() => this.popcorn(user.id)}
+            />
+            <Button
+              title="Ignore"
+              onPress={() => this.ignore(user.id)}
+            />
+          </React.Fragment>
+        );
+      });
 
     return (
       <View>
@@ -77,7 +77,7 @@ export class DashboardPage extends Component {
         {matchesList[0] ? matchesList[0] : <Text>Nobody</Text>}
         <Navigation />
       </View>
-    )
+    );
   }
 }
 
@@ -92,6 +92,6 @@ const mapStateToProps = state => ({
   pending: state.user.pending,
   matched: state.user.matched,
   filter: state.user.filter
-})
+});
 
-export default RequiresLogin()(connect(mapStateToProps)(DashboardPage))
+export default RequiresLogin()(connect(mapStateToProps)(DashboardPage));

@@ -10,7 +10,7 @@ import {
   AUTH_SUCCESS,
   authError,
   AUTH_ERROR
-} from './authActions'
+} from './authActions';
 
 import {
   setGenres,
@@ -55,7 +55,7 @@ import {
   IGNORE_USER_REQUEST,
   IGNORE_USER_SUCCESS,
   registerUser
-} from './userActions'
+} from './userActions';
 
 import {
   fetchMovies,
@@ -67,7 +67,7 @@ import {
   FETCH_MOVIES_FAILURE,
   resetMovies,
   RESET_MOVIES
-} from './movieActions'
+} from './movieActions';
 
 export {
   // Auth Actions
@@ -135,4 +135,4 @@ export {
   FETCH_MOVIES_FAILURE,
   resetMovies,
   RESET_MOVIES
-}
+};

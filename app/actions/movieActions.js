@@ -25,7 +25,7 @@ export const resetMovies = () => ({
 });
 
 export const fetchMovies = () => (dispatch, getState) => {
-  dispatch(fetchMoviesRequest())
+  dispatch(fetchMoviesRequest());
   const authToken = getState().auth.authToken;
   return fetch(`${API_BASE_URL}/movies`, {
     method: 'GET',

@@ -1,14 +1,14 @@
-import React, { Component } from 'react'
-import { Button, Switch, Text, View } from 'react-native'
-import { connect } from 'react-redux'
+import React, { Component } from 'react';
+import { Button, Switch, Text, View } from 'react-native';
+import { connect } from 'react-redux';
 
-import { updateUser } from '../../../actions'
+import { updateUser } from '../../../actions';
 export class GenreSelection extends Component {
   constructor(props) {
     super(props);
     this.state = {
       genres: []
-    }
+    };
   }
 
   toggleSelected(genre) {
@@ -24,8 +24,8 @@ export class GenreSelection extends Component {
   }
 
   handleSubmit() {
-    const {genres} = this.state;
-    this.props.dispatch(updateUser({genres}))
+    const { genres } = this.state;
+    this.props.dispatch(updateUser({ genres }));
   }
 
   render() {
@@ -66,7 +66,7 @@ export class GenreSelection extends Component {
           onPress={() => this.handleSubmit()}
         />
       </View>
-    )
+    );
   }
 }
 

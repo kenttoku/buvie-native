@@ -1,3 +1,3 @@
-import LoginFormRF from './LoginFormRF'
+import LoginFormRF from './LoginFormRF';
 
 export default LoginFormRF;
