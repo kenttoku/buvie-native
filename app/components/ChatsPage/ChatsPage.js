@@ -10,7 +10,6 @@ export class ChatsPage extends Component {
     return (
       <View>
         <Text> Chats Page </Text>
-        <Navigation />
       </View>
     );
   }

@@ -5,6 +5,7 @@ import styled from 'styled-components/native';
 
 import RegistrationForm from './RegistrationForm';
 import LoginForm from './LoginForm';
+import Navigation from '../Navigation';
 
 const StyledLogo = styled.Image`
   width: 247;

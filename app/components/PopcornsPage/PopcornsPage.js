@@ -10,7 +10,6 @@ export class PopcornsPage extends Component {
     return (
       <View>
         <Text> Popcorns Page </Text>
-        <Navigation />
       </View>
     );
   }

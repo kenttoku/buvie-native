@@ -9,7 +9,6 @@ export class SettingsPage extends Component {
     return (
       <View>
         <Text> SettingsPage </Text>
-        <Navigation />
       </View>
     );
   }

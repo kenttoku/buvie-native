@@ -7,7 +7,6 @@ import styled from 'styled-components/native';
 import { fetchCurrentuser, fetchMatches, popcornUser, ignoreUser, filterUser } from '../../actions';
 import MovieSelection from './MovieSelection';
 import GenreSelection from './GenreSelection';
-import Navigation from '../Navigation';
 import RequiresLogin from '../RequiresLogin/RequiresLogin';
 
 const StyledSwiper = styled(Swiper)`
@@ -22,6 +21,7 @@ const ImageContainer = styled.View`
 
 const StyledDashboard = styled.View`
   flex: 1;
+  margin-bottom: 64;
 `;
 
 const StyledMatchDisplay = styled.View`
@@ -162,7 +162,6 @@ export class DashboardPage extends Component {
     return (
       <StyledDashboard>
         {matchDisplay}
-        {/* <Navigation /> */}
       </StyledDashboard>
     );
   }
