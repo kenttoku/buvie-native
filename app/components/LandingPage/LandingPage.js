@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Text, TouchableOpacity, Button, View } from 'react-native';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-native';
 import styled from 'styled-components/native';
@@ -8,6 +7,8 @@ import RegistrationForm from './RegistrationForm';
 import LoginForm from './LoginForm';
 
 const StyledLogo = styled.Image`
+  width: 247;
+  height: 73;
   margin-top: 64;
   margin-bottom: 100;
 `;
@@ -25,9 +26,14 @@ const StyledFormContainer = styled.View`
   align-items: center;
 `;
 
+const StyledButtonContainer = styled.TouchableOpacity`
+  text-align: center;
+`;
+
 const StyledButtonText = styled.Text`
   font-size: 17;
   color: #fff;
+  text-align: center;
 `;
 
 class LandingPage extends Component {
@@ -57,24 +63,24 @@ class LandingPage extends Component {
       <StyledView>
         <StyledFormContainer>
 
-          <StyledLogo source={require('../../assets/images/buvie.gif')} />
+          <StyledLogo source={require('../../assets/images/buvielogoname.png')} />
           {activeForm === 'registration' && <RegistrationForm />}
           {activeForm === 'login' && <LoginForm />}
         </StyledFormContainer>
 
         {activeForm === 'registration' &&
-        <TouchableOpacity
+        <StyledButtonContainer
           onPress={() => this.toggleForm()}
         >
           <StyledButtonText>Already a member? Login</StyledButtonText>
-        </TouchableOpacity>}
+        </StyledButtonContainer>}
 
         {activeForm === 'login' &&
-        <TouchableOpacity
+        <StyledButtonContainer
           onPress={() => this.toggleForm()}
         >
           <StyledButtonText>Not a member? Sign Up</StyledButtonText>
-        </TouchableOpacity>}
+        </StyledButtonContainer>}
       </StyledView>
     );
   }

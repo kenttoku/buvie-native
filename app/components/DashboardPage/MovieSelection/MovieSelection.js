@@ -1,8 +1,49 @@
 import React, { Component } from 'react';
-import { Button, Image, Switch, Text, View } from 'react-native';
 import { connect } from 'react-redux';
+import styled from 'styled-components/native';
+import StyledButtonContainer from '../../styles/StyledButtonContainer'
+import StyledButtonText from '../..//styles/StyledButtonText'
 
 import { fetchMovies, updateUser, fetchCurrentuser, fetchMatches } from '../../../actions';
+
+
+const StyledView = styled.View`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const StyledMovieView = styled.View`
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const StyledInstructions = styled.Text`
+  margin-top: 16;
+  margin-bottom: 16;
+  font-size: 17;
+  color: #fff;
+`;
+
+const StyledFeedback = styled.Text`
+  margin-bottom: 16;
+  color: #fff;
+  font-size: 13;
+`;
+
+const StyledMovieText = styled.Text`
+  flex: 4;
+  color: #fff;
+  font-size: 17;
+`;
+
+const StyledMovieSwitch = styled.Switch`
+  flex: 1;
+`;
+
 
 export class MovieSelection extends Component {
   constructor(props) {
@@ -42,24 +83,26 @@ export class MovieSelection extends Component {
     // TODO: Use images instead of text for choosing movies
     const input = movies.map(movie => {
       return (
-        <React.Fragment key={movie.id}>
-          <Text>{movie.title}</Text>
-          <Switch
+        <StyledMovieView key={movie.id}>
+          <StyledMovieText numberOfLines={10}>{movie.title}</StyledMovieText>
+          <StyledMovieSwitch
             onValueChange={() => this.toggleSelected(movie.id)}
             value={this.state.movies.includes(movie.id)}
           />
-        </React.Fragment>);
+        </StyledMovieView>);
     });
 
     return (
-      <View>
+      <StyledView>
+        <StyledInstructions> Please choose 3 or more movies </StyledInstructions>
+        <StyledFeedback> {this.state.movies.length} selected </StyledFeedback>
         {input}
-        <Button
+        <StyledButtonContainer
           disabled={this.state.movies.length < 3}
-          title="Continue"
-          onPress={() => this.handleSubmit()}
-        />
-      </View>
+          onPress={() => this.handleSubmit()}>
+          <StyledButtonText>Continue</StyledButtonText>
+        </StyledButtonContainer>
+      </StyledView>
     );
   }
 }

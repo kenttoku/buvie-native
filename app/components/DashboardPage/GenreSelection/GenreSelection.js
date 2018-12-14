@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styled from 'styled-components/native';
-import { Button, Switch, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 
 import { updateUser } from '../../../actions';
