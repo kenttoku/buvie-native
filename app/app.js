@@ -7,6 +7,7 @@ import store from './store';
 import DashboardPage from './components/DashboardPage';
 import ChatsPage from './components/ChatsPage';
 import PopcornsPage from './components/PopcornsPage';
+import SettingsPage from './components/SettingsPage';
 
 export default class App extends Component {
   render() {
@@ -18,6 +19,7 @@ export default class App extends Component {
             <Route exact path="/dashboard" component={DashboardPage} />
             <Route exact path="/chats" component={ChatsPage} />
             <Route exact path="/popcorns" component={PopcornsPage} />
+            <Route exact path="/settings" component={SettingsPage} />
           </View>
         </Provider>
       </Router>

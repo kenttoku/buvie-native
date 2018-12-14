@@ -7,6 +7,7 @@ import { fetchCurrentuser, fetchMatches, popcornUser, ignoreUser, filterUser } f
 import MovieSelection from './MovieSelection';
 import GenreSelection from './GenreSelection';
 import Navigation from '../Navigation';
+import RequiresLogin from '../RequiresLogin/RequiresLogin';
 
 export class DashboardPage extends Component {
   componentDidMount() {
@@ -93,4 +94,4 @@ const mapStateToProps = state => ({
   filter: state.user.filter
 })
 
-export default connect(mapStateToProps)(DashboardPage)
+export default RequiresLogin()(connect(mapStateToProps)(DashboardPage))

@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
-import Navigation from '../Navigation';
+import { connect } from 'react-redux'
 
-export default class PopcornsPage extends Component {
+import Navigation from '../Navigation';
+import RequiresLogin from '../RequiresLogin';
+
+export class PopcornsPage extends Component {
   render() {
     return (
       <View>
@@ -12,3 +15,5 @@ export default class PopcornsPage extends Component {
     )
   }
 }
+
+export default RequiresLogin()(connect()(PopcornsPage))
