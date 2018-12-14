@@ -6,6 +6,7 @@ import md5 from 'js-md5';
 import { fetchCurrentuser, fetchMatches, popcornUser, ignoreUser, filterUser } from '../../actions';
 import MovieSelection from './MovieSelection';
 import GenreSelection from './GenreSelection';
+import Navigation from '../Navigation';
 
 export class DashboardPage extends Component {
   componentDidMount() {
@@ -28,7 +29,6 @@ export class DashboardPage extends Component {
 
   render() {
     const { genres, movies, matches, filter, loading } = this.props
-    console.log(loading)
 
     // if (loading) {
     //   return <Image
@@ -70,11 +70,11 @@ export class DashboardPage extends Component {
       );
     });
 
-    console.log(this.props)
     return (
       <View>
         <Text>You Matched with:</Text>
         {matchesList[0] ? matchesList[0] : <Text>Nobody</Text>}
+        <Navigation />
       </View>
     )
   }

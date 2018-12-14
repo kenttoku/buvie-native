@@ -25,7 +25,6 @@ class LandingPage extends Component {
       return <Redirect to="/dashboard" />
     }
 
-    console.log(this.props)
     const { activeForm } = this.state;
     return (
       <View>

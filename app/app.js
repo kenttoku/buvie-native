@@ -5,6 +5,8 @@ import { NativeRouter as Router, Route } from 'react-router-native'
 import LandingPage from './components/LandingPage'
 import store from './store';
 import DashboardPage from './components/DashboardPage';
+import ChatsPage from './components/ChatsPage';
+import PopcornsPage from './components/PopcornsPage';
 
 export default class App extends Component {
   render() {
@@ -14,6 +16,8 @@ export default class App extends Component {
           <View style={styles.container}>
             <Route exact path="/" component={LandingPage} />
             <Route exact path="/dashboard" component={DashboardPage} />
+            <Route exact path="/chats" component={ChatsPage} />
+            <Route exact path="/popcorns" component={PopcornsPage} />
           </View>
         </Provider>
       </Router>
