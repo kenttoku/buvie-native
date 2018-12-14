@@ -26,7 +26,7 @@ const StyledFormContainer = styled.View`
 `;
 
 const StyledButtonText = styled.Text`
-  font-size: 20;
+  font-size: 17;
   color: #fff;
 `;
 

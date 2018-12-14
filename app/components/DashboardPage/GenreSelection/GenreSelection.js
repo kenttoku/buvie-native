@@ -1,8 +1,50 @@
 import React, { Component } from 'react';
+import styled from 'styled-components/native';
 import { Button, Switch, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 
 import { updateUser } from '../../../actions';
+import StyledButtonContainer from '../../styles/StyledButtonContainer'
+import StyledButtonText from '../..//styles/StyledButtonText'
+
+const StyledView = styled.View`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const StyledGenreView = styled.View`
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const StyledInstructions = styled.Text`
+  margin-top: 16;
+  margin-bottom: 16;
+  font-size: 17;
+  color: #fff;
+`;
+
+const StyledFeedback = styled.Text`
+  margin-bottom: 16;
+  color: #fff;
+  font-size: 13;
+`;
+
+const StyledGenreText = styled.Text`
+  flex: 4;
+  color: #fff;
+  font-size: 17;
+`;
+
+const StyledGenreSwitch = styled.Switch`
+  flex: 1;
+`;
+
+
 export class GenreSelection extends Component {
   constructor(props) {
     super(props);
@@ -45,27 +87,28 @@ export class GenreSelection extends Component {
 
     const inputs = genreList.map(genre => {
       return (
-        <React.Fragment key={genre.id}>
-          <Text>{genre.name}</Text>
-          <Switch
+        <StyledGenreView key={genre.id}>
+          <StyledGenreText>{genre.name}</StyledGenreText>
+          <StyledGenreSwitch
             disabled={genres.length >= 3 && !genres.includes(genre.name)}
             onValueChange={() => this.toggleSelected(genre.name)}
             value={genres.includes(genre.name)}
           />
-        </React.Fragment>);
+        </StyledGenreView>);
     });
 
     return (
-      <View>
-        <Text> Please choose 3 genres </Text>
-        <Text> {genres.length} of 3 selected </Text>
+      <StyledView>
+        <StyledInstructions> Please choose 3 genres </StyledInstructions>
+        <StyledFeedback> {genres.length} of 3 selected </StyledFeedback>
         {inputs}
-        <Button
+
+        <StyledButtonContainer
           disabled={genres.length != 3}
-          title="Continue"
-          onPress={() => this.handleSubmit()}
-        />
-      </View>
+          onPress={() => this.handleSubmit()}>
+          <StyledButtonText>Continue</StyledButtonText>
+        </StyledButtonContainer>
+      </StyledView>
     );
   }
 }
