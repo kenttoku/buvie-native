@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Image } from 'react-native';
 import { connect } from 'react-redux';
+import Swiper from 'react-native-swiper';
 import styled from 'styled-components/native';
 
 import { fetchCurrentuser, fetchMatches, popcornUser, ignoreUser, filterUser } from '../../actions';
@@ -8,6 +9,16 @@ import MovieSelection from './MovieSelection';
 import GenreSelection from './GenreSelection';
 import Navigation from '../Navigation';
 import RequiresLogin from '../RequiresLogin/RequiresLogin';
+
+const StyledSwiper = styled(Swiper)`
+
+`;
+
+const ImageContainer = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
 
 const StyledDashboard = styled.View`
   flex: 1;
@@ -18,8 +29,6 @@ const StyledMatchDisplay = styled.View`
 `;
 
 const StyledMatchPoster = styled.Image`
-  margin-top: 40;
-  margin-bottom: 16;
   width: 300;
   height: 444;
 `;
@@ -121,12 +130,21 @@ export class DashboardPage extends Component {
 
     let matchDisplay;
     if (match) {
+      const matchMovies = match.movies.map(movie => {
+        return (
+          <ImageContainer>
+            <StyledMatchPoster
+              source={{uri: movie.poster}}
+              resizeMode="contain"
+              />
+          </ImageContainer>
+        )
+      })
       matchDisplay = (
         <StyledMatchDisplay>
-          <StyledMatchPoster
-            source={{uri: match.movies[this.state.image].poster}}
-            resizeMode="contain"
-          />
+          <StyledSwiper>
+            {matchMovies}
+          </StyledSwiper>
           <StyledMatchName>{match.username}</StyledMatchName>
           <StyledOptionsContainer>
             <StyledPopcornButtonContainer onPress={() => this.popcorn(match.id)}>
