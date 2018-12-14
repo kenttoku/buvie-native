@@ -15,6 +15,13 @@ export const setMovies = movies => ({
   movies
 });
 
+export const FILTER_USER = 'FILTER_USER';
+export const filterUser = user => ({
+  type: FILTER_USER,
+  user
+});
+
+
 export const FETCH_CURRENT_USER_REQUEST = 'FETCH_CURRENT_USER_REQUEST';
 export const fetchCurrentuserRequest = () => ({
   type: FETCH_CURRENT_USER_REQUEST
@@ -39,14 +46,12 @@ export const fetchCurrentuser = () => (dispatch, getState) => {
   if (currentUser) {
     userId = currentUser.id;
   }
-  console.log(userId)
   return fetch(`${API_BASE_URL}/users/${userId}`, {
     method: 'GET'
   })
     .then(res => res.json())
     .then(res => {
       dispatch(fetchCurrentuserSuccess(res));
-      console.log(res.genres)
       dispatch(setGenres(res.genres));
       dispatch(setMovies(res.movies));
     })
@@ -74,11 +79,8 @@ export const updateUser = data => (dispatch, getState) => {
   dispatch(updateUserRequest());
   const authToken = getState().auth.authToken;
   const currentUser = getState().auth.currentUser;
-  let userId;
-  if (currentUser) {
-    userId = currentUser.id;
-  }
-  return fetch(`${API_BASE_URL}/main/${userId}`, {
+
+  return fetch(`${API_BASE_URL}/main/${currentUser.id}`, {
     method: 'PUT',
     headers: {
       'content-type': 'application/json',
@@ -88,7 +90,6 @@ export const updateUser = data => (dispatch, getState) => {
   })
     .then(res => res.json())
     .then(res => {
-      console.log(res)
       dispatch(updateUserSuccess())
       dispatch(setGenres(res.genres));
       dispatch(setMovies(res.movies));
@@ -161,14 +162,50 @@ export const popcornUser = userId => (dispatch, getState) => {
     body: JSON.stringify(userId)
   })
     .then(res => {
-      console.log(res);
       dispatch(popcornUserSuccess())
     })
     .catch(err => dispatch(popcornUserFailure(err)));
 };
 
+
+export const IGNORE_USER_REQUEST = 'IGNORE_USER_REQUEST';
+export const ignoreUserRequest = () => ({
+  type: IGNORE_USER_REQUEST
+});
+
+export const IGNORE_USER_SUCCESS = 'IGNORE_USER_SUCCESS';
+export const ignoreUserSuccess = () => ({
+  type: IGNORE_USER_SUCCESS,
+  matched
+});
+
+export const IGNORE_USER_FAILURE = 'IGNORE_USER_FAILURE';
+export const ignoreUserFailure = error => ({
+  type: IGNORE_USER_FAILURE,
+  error
+});
+
+export const ignoreUser = userId => (dispatch, getState) => {
+  dispatch(ignoreUserRequest());
+  const authToken = getState().auth.authToken;
+  const currentUser = getState().auth.currentUser;
+
+  return fetch(`${API_BASE_URL}/main/ignore/${currentUser.id}`, {
+    method: 'PUT',
+    headers: {
+      'content-type': 'application/json',
+      Authorization: `Bearer ${authToken}`
+    },
+    body: JSON.stringify({ userId })
+  })
+    .then(() => {
+      console.log('success')
+      dispatch(ignoreUserSuccess());
+    })
+    .catch(err => dispatch(ignoreUserFailure(err)));
+};
+
 export const registerUser = user => () => {
-  console.log(user)
   return fetch(`${API_BASE_URL}/users`, {
     method: 'POST',
     headers: {

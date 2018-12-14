@@ -3,7 +3,7 @@ import { Button, Image, Text, View } from 'react-native';
 import { connect } from 'react-redux'
 import md5 from 'js-md5';
 
-import { fetchCurrentuser, fetchMatches, popcornUser } from '../../actions';
+import { fetchCurrentuser, fetchMatches, popcornUser, ignoreUser, filterUser } from '../../actions';
 import MovieSelection from './MovieSelection';
 import GenreSelection from './GenreSelection';
 
@@ -14,17 +14,28 @@ export class DashboardPage extends Component {
   }
 
   popcorn(userId) {
-    console.log('popcorning', userId)
     this.props.dispatch(popcornUser({ userId }))
+      .then(() => this.props.dispatch(fetchCurrentuser()))
+      .then(() => this.props.dispatch(fetchMatches()))
   }
 
   ignore(userId) {
-    console.log('ignoring ', userId)
+    this.props.dispatch(ignoreUser({ userId }))
+      .then(() => this.props.dispatch(filterUser(userId)))
+      .then(() => this.props.dispatch(fetchCurrentuser()))
+      .then(() => this.props.dispatch(fetchMatches()))
   }
 
   render() {
-    const { genres, movies, matches, filter } = this.props
-    console.log(this.props)
+    const { genres, movies, matches, filter, loading } = this.props
+    console.log(loading)
+
+    // if (loading) {
+    //   return <Image
+    //     source={require('../../assets/buvie.gif')}
+    //   />
+    // }
+
     if (!genres.length) {
       return <GenreSelection />;
     }
@@ -70,6 +81,7 @@ export class DashboardPage extends Component {
 }
 
 const mapStateToProps = state => ({
+  loading: !!(state.auth.loading || state.user.loading || state.movie.loading),
   username: state.auth.currentUser.username,
   email: state.auth.currentUser.email,
   movies: state.user.movies,
