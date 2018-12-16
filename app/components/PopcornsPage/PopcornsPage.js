@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components/native';
 
 import RequiresLogin from '../RequiresLogin';
-import { fetchPopcorn, popcornUser, ignoreUser } from '../../actions';
+import { fetchPopcorn, popcornUser, ignoreUser, filterUser } from '../../actions';
 
 const StyledPopcornPage = styled.View`
   flex: 1;
@@ -102,22 +102,21 @@ export class PopcornsPage extends Component {
   }
 
   popcorn(userId) {
+    console.log(userId)
     this.props.dispatch(popcornUser({ userId }))
       .then(() => this.props.dispatch(fetchPopcorn()))
   }
 
   ignore(userId) {
     this.props.dispatch(ignoreUser({ userId }))
+      .then(() => this.props.dispatch(filterUser(userId)))
       .then(() => this.props.dispatch(fetchPopcorn()))
   }
 
   openRow(rowRef, data) {
-    console.log(data.item)
-    // if (rowRef.isOpen) {
-    //   rowRef.closeRow();
-    // } else {
-    //   rowRef.manuallySwipeRow(-150);
-    // }
+    if (!rowRef.isOpen) {
+      rowRef.manuallySwipeRow(-150);
+    }
   }
 
   render() {
@@ -131,6 +130,8 @@ export class PopcornsPage extends Component {
         </StyledNotice>
       )
 
+      popcorn = popcorn.filter(user => !this.props.filter.includes(user._id))
+
       if (popcorn.length) {
         popcorn = popcorn.map(user => {
           user.key = user._id;
@@ -141,7 +142,7 @@ export class PopcornsPage extends Component {
             useFlatList
             data={popcorn}
             renderItem={ (data, rowMap) => (
-              <StyledUserListItem onPress={ () => this.openRow(rowMap[data.item.index], data)}>
+              <StyledUserListItem onPress={ () => this.openRow(rowMap[data.item.key], data)}>
                 <RowFront>
                   <StyledUsername>{data.item.username}</StyledUsername>
                 </RowFront>
@@ -149,10 +150,10 @@ export class PopcornsPage extends Component {
             )}
             renderHiddenItem={ data => (
               <RowBack>
-                <StyledPopcornButtonContainer onPress={() => this.popcorn(data.item.id)}>
+                <StyledPopcornButtonContainer onPress={() => this.popcorn(data.item._id)}>
                   <StyledButtonText isPopcorn={true}>Popcorn</StyledButtonText>
                 </StyledPopcornButtonContainer>
-                <StyledIgnoreButtonContainer onPress={() => this.ignore(data.item.id)}>
+                <StyledIgnoreButtonContainer onPress={() => this.ignore(data.item._id)}>
                   <StyledButtonText>Ignore</StyledButtonText>
                 </StyledIgnoreButtonContainer>
               </RowBack>
@@ -198,7 +199,8 @@ export class PopcornsPage extends Component {
 
 const mapStateToProps = state => ({
   popcorn: state.user.popcorn,
-  pending: state.user.pending
+  pending: state.user.pending,
+  filter: state.user.filter
 })
 
 export default RequiresLogin()(connect(mapStateToProps)(PopcornsPage));
