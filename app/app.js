@@ -12,8 +12,7 @@ import SettingsPage from './components/SettingsPage';
 import Navigation from './components/Navigation';
 
 const StyledView = styled.View`
-  margin-top: 44;
-  padding-bottom: 39;
+  padding-bottom: 44;
   padding-left: 16;
   padding-right: 16;
   flex: 1;
@@ -21,7 +20,9 @@ const StyledView = styled.View`
   background-color: #212032;
 `;
 
-const StyledContainer = styled.View`
+const StyledSafeAreaView = styled.SafeAreaView`
+  flex: 1;
+  background-color: green;
 `;
 
 export default class App extends Component {
@@ -29,17 +30,19 @@ export default class App extends Component {
     return (
       <Router>
         <Provider store={store}>
-          <StyledView>
-            <Route exact path="/" component={LandingPage} />
+          <StyledSafeAreaView>
+            <StyledView>
+              <Route exact path="/" component={LandingPage} />
               <Route exact path="/dashboard" component={DashboardPage} />
               <Route exact path="/dashboard" component={Navigation} />
-            <Route exact path="/chats" component={ChatsPage} />
-            <Route exact path="/chats" component={Navigation} />
-            <Route exact path="/popcorns" component={PopcornsPage} />
-            <Route exact path="/popcorns" component={Navigation} />
-            <Route exact path="/settings" component={SettingsPage} />
-            <Route exact path="/settings" component={Navigation} />
-          </StyledView>
+              <Route exact path="/chats" component={ChatsPage} />
+              <Route exact path="/chats" component={Navigation} />
+              <Route exact path="/popcorns" component={PopcornsPage} />
+              <Route exact path="/popcorns" component={Navigation} />
+              <Route exact path="/settings" component={SettingsPage} />
+              <Route exact path="/settings" component={Navigation} />
+            </StyledView>
+          </StyledSafeAreaView>
         </Provider>
       </Router>
     );
