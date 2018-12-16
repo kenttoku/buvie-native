@@ -54,7 +54,14 @@ import {
   IGNORE_USER_FAILURE,
   IGNORE_USER_REQUEST,
   IGNORE_USER_SUCCESS,
-  registerUser
+  registerUser,
+  fetchPopcorn,
+  fetchPopcornFailure,
+  fetchPopcornRequest,
+  fetchPopcornSuccess,
+  FETCH_POPCORN_FAILURE,
+  FETCH_POPCORN_REQUEST,
+  FETCH_POPCORN_SUCCESS
 } from './userActions';
 
 import {
@@ -125,6 +132,13 @@ export {
   IGNORE_USER_REQUEST,
   IGNORE_USER_SUCCESS,
   registerUser,
+  fetchPopcorn,
+  fetchPopcornFailure,
+  fetchPopcornRequest,
+  fetchPopcornSuccess,
+  FETCH_POPCORN_FAILURE,
+  FETCH_POPCORN_REQUEST,
+  FETCH_POPCORN_SUCCESS,
   // Movie Actions
   fetchMovies,
   fetchMoviesRequest,

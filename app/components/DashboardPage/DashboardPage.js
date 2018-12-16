@@ -9,10 +9,6 @@ import MovieSelection from './MovieSelection';
 import GenreSelection from './GenreSelection';
 import RequiresLogin from '../RequiresLogin/RequiresLogin';
 
-const StyledSwiper = styled(Swiper)`
-
-`;
-
 const ImageContainer = styled.View`
   flex: 1;
   justify-content: center;
@@ -22,6 +18,8 @@ const ImageContainer = styled.View`
 const StyledDashboard = styled.View`
   flex: 1;
   margin-bottom: 64;
+  padding-left: 16;
+  padding-right: 16;
 `;
 
 const StyledMatchDisplay = styled.View`
@@ -74,13 +72,6 @@ const StyledButtonText = styled.Text`
   text-align: center;
 `;
 export class DashboardPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      image: 0
-    }
-  }
-
   componentDidMount() {
     this.props.dispatch(fetchCurrentuser())
       .then(() => this.props.dispatch(fetchMatches()));
@@ -90,9 +81,6 @@ export class DashboardPage extends Component {
     this.props.dispatch(popcornUser({ userId }))
       .then(() => this.props.dispatch(fetchCurrentuser()))
       .then(() => this.props.dispatch(fetchMatches()))
-      .then(() => this.setState({
-        image: 0
-      }))
   }
 
   ignore(userId) {
@@ -100,9 +88,6 @@ export class DashboardPage extends Component {
       .then(() => this.props.dispatch(filterUser(userId)))
       .then(() => this.props.dispatch(fetchCurrentuser()))
       .then(() => this.props.dispatch(fetchMatches()))
-      .then(() => this.setState({
-        image: 0
-      }))
   }
 
   render() {
@@ -132,7 +117,7 @@ export class DashboardPage extends Component {
     if (match) {
       const matchMovies = match.movies.map(movie => {
         return (
-          <ImageContainer>
+          <ImageContainer key={movie._id}>
             <StyledMatchPoster
               source={{uri: movie.poster}}
               resizeMode="contain"
@@ -142,9 +127,9 @@ export class DashboardPage extends Component {
       })
       matchDisplay = (
         <StyledMatchDisplay>
-          <StyledSwiper>
+          <Swiper>
             {matchMovies}
-          </StyledSwiper>
+          </Swiper>
           <StyledMatchName>{match.username}</StyledMatchName>
           <StyledOptionsContainer>
             <StyledPopcornButtonContainer onPress={() => this.popcorn(match.id)}>

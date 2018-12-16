@@ -10,6 +10,9 @@ const StyledView = styled.View`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-left: 16;
+  padding-right: 16;
+  padding-bottom: 64;
 `;
 
 const StyledGenreView = styled.View`

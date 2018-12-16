@@ -12,8 +12,6 @@ import SettingsPage from './components/SettingsPage';
 import Navigation from './components/Navigation';
 
 const StyledView = styled.View`
-  padding-left: 16;
-  padding-right: 16;
   flex: 1;
   align-items: center;
   background-color: #212032;

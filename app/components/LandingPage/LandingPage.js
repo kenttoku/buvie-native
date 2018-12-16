@@ -19,7 +19,7 @@ const StyledView = styled.View`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding-bottom: 44px;ß
+  padding-bottom: 44px;
 `;
 
 const StyledFormContainer = styled.View`

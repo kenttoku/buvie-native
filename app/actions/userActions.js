@@ -224,3 +224,42 @@ export const registerUser = user => () => {
       }
     });
 };
+
+export const FETCH_POPCORN_REQUEST = 'FETCH_POPCORN_REQUEST';
+export const fetchPopcornRequest = () => ({
+  type: FETCH_POPCORN_REQUEST
+});
+
+export const FETCH_POPCORN_SUCCESS = 'FETCH_POPCORN_SUCCESS';
+export const fetchPopcornSuccess = popcorn => ({
+  type: FETCH_POPCORN_SUCCESS,
+  popcorn
+});
+
+export const FETCH_POPCORN_FAILURE = 'FETCH_POPCORN_FAILURE';
+export const fetchPopcornFailure = error => ({
+  type: FETCH_POPCORN_FAILURE,
+  error
+});
+
+export const fetchPopcorn = () => (dispatch, getState) => {
+  dispatch(fetchPopcornRequest());
+  const authToken = getState().auth.authToken;
+  const currentUser = getState().auth.currentUser;
+  let userId;
+  if (currentUser) {
+    userId = currentUser.id;
+  }
+
+  return fetch(`${API_BASE_URL}/main/popcorn/${userId}`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${authToken}`
+    }
+  })
+    .then(res => res.json())
+    .then(res => {
+      dispatch(fetchPopcornSuccess(res));
+    })
+    .catch(err => dispatch(fetchPopcornFailure(err)));
+};
