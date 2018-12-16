@@ -7,7 +7,7 @@ const StyledNavigation = styled.View`
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 39;
+  bottom: 0;
   height: 44;
   background-color: red;
 `;
