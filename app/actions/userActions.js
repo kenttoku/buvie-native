@@ -263,3 +263,42 @@ export const fetchPopcorn = () => (dispatch, getState) => {
     })
     .catch(err => dispatch(fetchPopcornFailure(err)));
 };
+
+export const NEVER_MIND_USER_REQUEST = 'NEVER_MIND_USER_REQUEST';
+export const neverMindUserRequest = () => ({
+  type: NEVER_MIND_USER_REQUEST
+});
+
+export const NEVER_MIND_USER_SUCCESS = 'NEVER_MIND_USER_SUCCESS';
+export const neverMindUserSuccess = () => ({
+  type: NEVER_MIND_USER_SUCCESS
+});
+
+export const NEVER_MIND_USER_FAILURE = 'NEVER_MIND_USER_FAILURE';
+export const neverMindUserFailure = error => ({
+  type: NEVER_MIND_USER_FAILURE,
+  error
+});
+
+export const neverMindUser = neverMindUserId => (dispatch, getState) => {
+  dispatch(neverMindUserRequest());
+  const authToken = getState().auth.authToken;
+  const currentUser = getState().auth.currentUser;
+  let userId;
+  if (currentUser) {
+    userId = currentUser.id;
+  }
+
+  return fetch(`${API_BASE_URL}/main/nevermind/${userId}`, {
+    method: 'PUT',
+    headers: {
+      'content-type': 'application/json',
+      Authorization: `Bearer ${authToken}`
+    },
+    body: JSON.stringify({ userId: neverMindUserId })
+  })
+    .then(res => {
+      dispatch(neverMindUserSuccess(res));
+    })
+    .catch(err => dispatch(neverMindUserFailure(err)));
+};

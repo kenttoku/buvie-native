@@ -16,7 +16,10 @@ import {
   UPDATE_USER_FAILURE,
   IGNORE_USER_REQUEST,
   IGNORE_USER_SUCCESS,
-  IGNORE_USER_FAILURE
+  IGNORE_USER_FAILURE,
+  NEVER_MIND_USER_FAILURE,
+  NEVER_MIND_USER_REQUEST,
+  NEVER_MIND_USER_SUCCESS
 } from '../actions';
 
 const initialState = {
@@ -115,6 +118,20 @@ export default function reducer(state = initialState, action) {
       loading: false,
     });
   } else if (action.type === IGNORE_USER_FAILURE) {
+    return Object.assign({}, state, {
+      loading: false,
+      error: action.error
+    });
+  }else if (action.type === NEVER_MIND_USER_REQUEST) {
+    return Object.assign({}, state, {
+      loading: true,
+      error: null
+    });
+  } else if (action.type === NEVER_MIND_USER_SUCCESS) {
+    return Object.assign({}, state, {
+      loading: false,
+    });
+  } else if (action.type === NEVER_MIND_USER_FAILURE) {
     return Object.assign({}, state, {
       loading: false,
       error: action.error

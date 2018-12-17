@@ -43,7 +43,7 @@ const StyledSwipeListView = styled(SwipeListView)`
   width: 100%;
 `;
 
-const StyledPopcornButtonContainer = styled.TouchableOpacity`
+const StyledPopcornButtonContainer = styled.TouchableHighlight`
   justify-content: center;
   align-items: center;
   height: 100%;
@@ -51,7 +51,7 @@ const StyledPopcornButtonContainer = styled.TouchableOpacity`
   background-color: #a33944;
 `;
 
-const StyledIgnoreButtonContainer = styled.TouchableOpacity`
+const StyledIgnoreButtonContainer = styled.TouchableHighlight`
   justify-content: center;
   align-items: center;
   height: 100%;
@@ -68,7 +68,7 @@ const StyledButtonText = styled.Text`
 const RowFront = styled.View`
   align-items: flex-start;
   background-color: #212032;
-  border-bottom-color: black;
+  border-bottom-color: #8b8b99;
   border-bottom-width: 1;
   justify-content: center;
   padding-left: 16;
@@ -84,7 +84,7 @@ const RowBack = styled.View`
   justify-content: flex-end;
 `;
 
-const ToggleMenuContainer = styled.TouchableOpacity`
+const ToggleMenuContainer = styled.TouchableHighlight`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -98,6 +98,7 @@ const ToggleMenuText = styled.Text`
   color: #fff;
   font-size: 17;
 `;
+
 export class PopcornsPage extends Component {
   constructor(props) {
     super(props);

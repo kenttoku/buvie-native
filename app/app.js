@@ -19,7 +19,7 @@ const StyledView = styled.View`
 
 const StyledSafeAreaView = styled.SafeAreaView`
   flex: 1;
-  background-color: green;
+  background-color: #313041;
 `;
 
 export default class App extends Component {
@@ -29,6 +29,7 @@ export default class App extends Component {
         <Provider store={store}>
           <StyledSafeAreaView>
             <StyledView>
+              <StatusBar barStyle="light-content" backgroundColor = "#313041"/>
               <Route exact path="/" component={LandingPage} />
               <Route exact path="/dashboard" component={DashboardPage} />
               <Route exact path="/dashboard" component={Navigation} />
