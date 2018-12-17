@@ -38,12 +38,6 @@ export default class Navigation extends Component {
             <StyledNavigationText>Home</StyledNavigationText>
           </StyledLinkView>
         </Link>
-        <Link to="/settings">
-          <StyledLinkView>
-            <Image source={require('../../assets/images/baseline_settings_white_18dp.png')} />
-            <StyledNavigationText>Setting</StyledNavigationText>
-          </StyledLinkView>
-        </Link>
         <Link to="/popcorns">
           <StyledLinkView>
             <Image source={require('../../assets/images/baseline_person_add_white_18dp.png')} />
@@ -54,6 +48,12 @@ export default class Navigation extends Component {
           <StyledLinkView>
             <Image source={require('../../assets/images/baseline_chat_white_18dp.png')} />
             <StyledNavigationText>Chats</StyledNavigationText>
+          </StyledLinkView>
+        </Link>
+        <Link to="/settings">
+          <StyledLinkView>
+            <Image source={require('../../assets/images/baseline_settings_white_18dp.png')} />
+            <StyledNavigationText>Setting</StyledNavigationText>
           </StyledLinkView>
         </Link>
       </StyledNavigationView>
