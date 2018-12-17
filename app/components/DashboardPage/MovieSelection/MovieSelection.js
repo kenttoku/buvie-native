@@ -81,7 +81,6 @@ export class MovieSelection extends Component {
 
   render() {
     const { movies } = this.props;
-    console.log(this.state.movies);
 
     // TODO: Use images instead of text for choosing movies
     const input = movies.map(movie => {

@@ -120,7 +120,6 @@ export class PopcornsPage extends Component {
   }
 
   popcorn(userId) {
-    console.log(userId)
     this.props.dispatch(popcornUser({ userId }))
       .then(() => this.props.dispatch(fetchPopcorn()))
   }

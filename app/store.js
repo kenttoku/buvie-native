@@ -10,17 +10,4 @@ const store = createStore(
   applyMiddleware(thunk)
 );
 
-const hydrate = async () => {
-  console.log('running')
-  const authToken = await loadAuthToken();
-  console.log(authToken)
-  if (authToken) {
-    console.log(authToken)
-    const token = authToken;
-    store.dispatch(setAuthToken(token));
-    store.dispatch(refreshAuthToken());
-  }
-}
-
-hydrate();
 export default store;

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { API_BASE_URL } from '../config';
 
 
