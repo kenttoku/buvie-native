@@ -131,6 +131,12 @@ export class PopcornsPage extends Component {
       .then(() => this.props.dispatch(fetchPopcorn()))
   }
 
+  neverMind(userId) {
+    this.props.dispatch(neverMindUser({ userId }))
+      .then(() => this.props.dispatch(filterUser(userId)))
+      .then(() => this.props.dispatch(fetchPopcorn()))
+  }
+
   openRow(rowRef, size) {
     if (!rowRef.isOpen) {
       rowRef.manuallySwipeRow(size);
@@ -229,8 +235,8 @@ export class PopcornsPage extends Component {
             )}
             renderHiddenItem={ data => (
               <RowBack>
-                <StyledNeverMindButtonContainer onPress={() => this.neverMindUser(data.item._id)}>
-                  <StyledButtonText>Ignore</StyledButtonText>
+                <StyledNeverMindButtonContainer onPress={() => this.neverMind(data.item._id)}>
+                  <StyledButtonText>Delete</StyledButtonText>
                 </StyledNeverMindButtonContainer>
               </RowBack>
             )}

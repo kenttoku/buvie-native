@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 const StyledHeaderView = styled.View`
   text-align: center;
   justify-content: center;
-  background-color: purple;
+  background-color: #313041;
   height: 44;
   width: 100%;
   border-bottom-color: black;
