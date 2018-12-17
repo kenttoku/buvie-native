@@ -5,7 +5,8 @@ import styled from 'styled-components/native';
 
 import RegistrationForm from './RegistrationForm';
 import LoginForm from './LoginForm';
-import Navigation from '../Navigation';
+import { loadAuthToken } from '../../storage';
+import { setAuthToken, refreshAuthToken } from '../../actions'
 
 const StyledLogo = styled.Image`
   width: 247;
@@ -44,6 +45,18 @@ class LandingPage extends Component {
     this.state = {
       activeForm: 'login'
     };
+  }
+
+  componentDidMount() {
+    this.loadToken()
+  }
+
+  async loadToken() {
+    const authToken = await loadAuthToken()
+    if (authToken) {
+      this.props.dispatch(setAuthToken(authToken))
+        .then(this.props.dispatch(refreshAuthToken()))
+    }
   }
 
   toggleForm() {

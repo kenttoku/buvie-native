@@ -20,9 +20,6 @@ const StyledNavigationText = styled.Text`
   font-size: 10;
 `;
 
-const StyledNavigationImage = styled.Image`
-`;
-
 const StyledLinkView = styled.View`
   align-items: center;
   justify-content: center;

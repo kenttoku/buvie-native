@@ -154,14 +154,9 @@ export class DashboardPage extends Component {
 
 const mapStateToProps = state => ({
   loading: !!(state.auth.loading || state.user.loading || state.movie.loading),
-  username: state.auth.currentUser.username,
-  email: state.auth.currentUser.email,
   movies: state.user.movies,
   genres: state.user.genres,
   matches: state.user.matches,
-  popcorn: state.user.popcorn,
-  pending: state.user.pending,
-  matched: state.user.matched,
   filter: state.user.filter
 });
 

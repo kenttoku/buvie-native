@@ -3,6 +3,7 @@ import { SubmissionError } from 'redux-form';
 
 import { API_BASE_URL } from '../config';
 import { normalizeResponseErrors } from './utils';
+import { saveAuthToken, clearAuthToken } from '../storage';
 
 export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN';
 export const setAuthToken = authToken => ({
@@ -36,7 +37,7 @@ const storeAuthInfo = (authToken, dispatch) => {
   const decodedToken = jwtDecode(authToken);
   dispatch(setAuthToken(authToken));
   dispatch(authSuccess(decodedToken.user));
-  // saveAuthToken(authToken);
+  saveAuthToken(authToken);
 };
 
 export const login = (username, password) => dispatch => {
@@ -69,4 +70,22 @@ export const login = (username, password) => dispatch => {
         );
       })
   );
+};
+
+export const refreshAuthToken = () => (dispatch, getState) => {
+  dispatch(authRequest());
+  const authToken = getState().auth.authToken;
+  return fetch(`${API_BASE_URL}/auth/refresh`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${authToken}`
+    }
+  })
+    .then(res => res.json())
+    .then(({ authToken }) => storeAuthInfo(authToken, dispatch))
+    .catch(err => {
+      dispatch(authError(err));
+      dispatch(clearAuth());
+      clearAuthToken(authToken);
+    });
 };
