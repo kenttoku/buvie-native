@@ -48,7 +48,7 @@ class LandingPage extends Component {
   }
 
   componentDidMount() {
-    this.loadToken()
+    this.loadToken().catch(err => console.log(err))
   }
 
   async loadToken() {
@@ -56,6 +56,7 @@ class LandingPage extends Component {
     if (authToken) {
       this.props.dispatch(setAuthToken(authToken))
         .then(this.props.dispatch(refreshAuthToken()))
+        .catch(err => console.log(err))
     }
   }
 
