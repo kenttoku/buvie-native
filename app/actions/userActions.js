@@ -302,3 +302,8 @@ export const neverMindUser = neverMindUserId => (dispatch, getState) => {
     })
     .catch(err => dispatch(neverMindUserFailure(err)));
 };
+
+export const RESET_USER = 'RESET_USER';
+export const resetUser = () => ({
+  type: RESET_USER
+});

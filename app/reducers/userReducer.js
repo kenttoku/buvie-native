@@ -19,7 +19,8 @@ import {
   IGNORE_USER_FAILURE,
   NEVER_MIND_USER_FAILURE,
   NEVER_MIND_USER_REQUEST,
-  NEVER_MIND_USER_SUCCESS
+  NEVER_MIND_USER_SUCCESS,
+  RESET_USER
 } from '../actions';
 
 const initialState = {
@@ -136,6 +137,8 @@ export default function reducer(state = initialState, action) {
       loading: false,
       error: action.error
     });
+  } else if (action.type === RESET_USER) {
+    return initialState;
   }
   return state;
 }

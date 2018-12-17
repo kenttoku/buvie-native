@@ -8,6 +8,7 @@ import { fetchCurrentuser, fetchMatches, popcornUser, ignoreUser, filterUser } f
 import MovieSelection from './MovieSelection';
 import GenreSelection from './GenreSelection';
 import RequiresLogin from '../RequiresLogin/RequiresLogin';
+import Navigation from '../Navigation';
 
 const ImageContainer = styled.View`
   flex: 1;
@@ -145,9 +146,12 @@ export class DashboardPage extends Component {
     }
 
     return (
-      <StyledDashboard>
-        {matchDisplay}
-      </StyledDashboard>
+      <React.Fragment>
+        <StyledDashboard>
+          {matchDisplay}
+        </StyledDashboard>
+        <Navigation />
+      </React.Fragment>
     );
   }
 }

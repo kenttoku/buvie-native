@@ -32,7 +32,6 @@ export default class App extends Component {
               <StatusBar barStyle="light-content" backgroundColor = "#313041"/>
               <Route exact path="/" component={LandingPage} />
               <Route exact path="/dashboard" component={DashboardPage} />
-              <Route exact path="/dashboard" component={Navigation} />
               <Route exact path="/chats" component={ChatsPage} />
               <Route exact path="/chats" component={Navigation} />
               <Route exact path="/popcorns" component={PopcornsPage} />
