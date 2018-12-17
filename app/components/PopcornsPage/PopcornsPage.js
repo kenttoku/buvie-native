@@ -5,7 +5,7 @@ import styled from 'styled-components/native';
 import Header from '../Header';
 
 import RequiresLogin from '../RequiresLogin';
-import { fetchPopcorn, popcornUser, ignoreUser, filterUser } from '../../actions';
+import { fetchPopcorn, popcornUser, ignoreUser, filterUser, neverMindUser } from '../../actions';
 
 const StyledPopcornPage = styled.View`
   flex: 1;
@@ -48,7 +48,7 @@ const StyledPopcornButtonContainer = styled.TouchableHighlight`
   align-items: center;
   height: 100%;
   width: 75;
-  background-color: #a33944;
+  background-color: #4cd964;
 `;
 
 const StyledIgnoreButtonContainer = styled.TouchableHighlight`
@@ -56,12 +56,20 @@ const StyledIgnoreButtonContainer = styled.TouchableHighlight`
   align-items: center;
   height: 100%;
   width: 75;
-  background-color: #b8b999;
+  background-color: #ff3b30;
+`;
+
+const StyledNeverMindButtonContainer = styled.TouchableHighlight`
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 75;
+  background-color: #ff3b30;
 `;
 
 const StyledButtonText = styled.Text`
   font-size: 17;
-  color: ${props => props.isPopcorn ? '#fff' : '#000'};
+  color: ${props => props.isPopcorn ? '#000' : '#fff'};
   text-align: center;
 `;
 
@@ -123,9 +131,9 @@ export class PopcornsPage extends Component {
       .then(() => this.props.dispatch(fetchPopcorn()))
   }
 
-  openRow(rowRef, data) {
+  openRow(rowRef, size) {
     if (!rowRef.isOpen) {
-      rowRef.manuallySwipeRow(-150);
+      rowRef.manuallySwipeRow(size);
     }
   }
 
@@ -161,7 +169,7 @@ export class PopcornsPage extends Component {
             useFlatList
             data={popcorn}
             renderItem={ (data, rowMap) => (
-              <StyledUserListItem onPress={ () => this.openRow(rowMap[data.item.key], data)}>
+              <StyledUserListItem onPress={ () => this.openRow(rowMap[data.item.key], -150)}>
                 <RowFront>
                   <StyledUsername>{data.item.username}</StyledUsername>
                 </RowFront>
@@ -213,7 +221,7 @@ export class PopcornsPage extends Component {
             useFlatList
             data={pending}
             renderItem={ (data, rowMap) => (
-              <StyledUserListItem onPress={ () => this.openRow(rowMap[data.item.key], data)}>
+              <StyledUserListItem onPress={ () => this.openRow(rowMap[data.item.key], -75)}>
                 <RowFront>
                   <StyledUsername>{data.item.username}</StyledUsername>
                 </RowFront>
@@ -221,15 +229,12 @@ export class PopcornsPage extends Component {
             )}
             renderHiddenItem={ data => (
               <RowBack>
-                <StyledPopcornButtonContainer onPress={() => this.popcorn(data.item._id)}>
-                  <StyledButtonText isPopcorn={true}>Popcorn</StyledButtonText>
-                </StyledPopcornButtonContainer>
-                <StyledIgnoreButtonContainer onPress={() => this.ignore(data.item._id)}>
+                <StyledNeverMindButtonContainer onPress={() => this.neverMindUser(data.item._id)}>
                   <StyledButtonText>Ignore</StyledButtonText>
-                </StyledIgnoreButtonContainer>
+                </StyledNeverMindButtonContainer>
               </RowBack>
             )}
-            rightOpenValue={-150}
+            rightOpenValue={-75}
             previewOpenValue={.01}
           />
         )
