@@ -20,6 +20,9 @@ const StyledNavigationText = styled.Text`
   font-size: 10;
 `;
 
+const StyledNavigationImage = styled.Image`
+`;
+
 const StyledLinkView = styled.View`
   align-items: center;
   justify-content: center;
@@ -43,7 +46,7 @@ export default class Navigation extends Component {
         </Link>
         <Link to="/popcorns">
           <StyledLinkView>
-            <Image source={require('../../assets/images/baseline_home_white_18dp.png')} />
+            <Image source={require('../../assets/images/baseline_person_add_white_18dp.png')} />
             <StyledNavigationText>Popcorns</StyledNavigationText>
           </StyledLinkView>
         </Link>
