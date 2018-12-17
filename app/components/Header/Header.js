@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import styled from 'styled-components/native';
 
 const StyledHeaderView = styled.View`
@@ -21,6 +21,6 @@ const Header = ({ heading }) => (
   <StyledHeaderView>
     <StyledHeaderText>{ heading }</StyledHeaderText>
   </StyledHeaderView>
-)
+);
 
-export default Header
+export default Header;

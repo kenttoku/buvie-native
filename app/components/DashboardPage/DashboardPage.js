@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, Platform } from 'react-native';
+import { Image } from 'react-native';
 import { connect } from 'react-redux';
 import Swiper from 'react-native-swiper';
 import styled from 'styled-components/native';
@@ -81,14 +81,14 @@ export class DashboardPage extends Component {
   popcorn(userId) {
     this.props.dispatch(popcornUser({ userId }))
       .then(() => this.props.dispatch(fetchCurrentuser()))
-      .then(() => this.props.dispatch(fetchMatches()))
+      .then(() => this.props.dispatch(fetchMatches()));
   }
 
   ignore(userId) {
     this.props.dispatch(ignoreUser({ userId }))
       .then(() => this.props.dispatch(filterUser(userId)))
       .then(() => this.props.dispatch(fetchCurrentuser()))
-      .then(() => this.props.dispatch(fetchMatches()))
+      .then(() => this.props.dispatch(fetchMatches()));
   }
 
   render() {
@@ -96,12 +96,12 @@ export class DashboardPage extends Component {
 
     if (loading) {
       return (
-      <StyledSpinnerView>
-        <Image
-          source={require('../../assets/images/buvie.gif')}
-        />
-      </StyledSpinnerView>
-      )
+        <StyledSpinnerView>
+          <Image
+            source={require('../../assets/images/buvie.gif')}
+          />
+        </StyledSpinnerView>
+      );
     }
 
     if (!genres.length) {
@@ -112,7 +112,7 @@ export class DashboardPage extends Component {
       return <MovieSelection />;
     }
 
-    const match = matches.filter(user => !filter.includes(user.id))[0]
+    const match = matches.filter(user => !filter.includes(user.id))[0];
 
     let matchDisplay;
     if (match) {
@@ -120,12 +120,12 @@ export class DashboardPage extends Component {
         return (
           <ImageContainer key={movie._id}>
             <StyledMatchPoster
-              source={{uri: movie.poster}}
+              source={{ uri: movie.poster }}
               resizeMode="contain"
-              />
+            />
           </ImageContainer>
-        )
-      })
+        );
+      });
       matchDisplay = (
         <StyledMatchDisplay>
           <Swiper>
@@ -142,7 +142,7 @@ export class DashboardPage extends Component {
             </StyledIgnoreButtonContainer>
           </StyledOptionsContainer>
         </StyledMatchDisplay>
-        )
+      );
     }
 
     return (

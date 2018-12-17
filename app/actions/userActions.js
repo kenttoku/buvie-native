@@ -161,7 +161,7 @@ export const popcornUser = userId => (dispatch, getState) => {
     },
     body: JSON.stringify(userId)
   })
-    .then(res => {
+    .then(() => {
       dispatch(popcornUserSuccess());
     })
     .catch(err => dispatch(popcornUserFailure(err)));

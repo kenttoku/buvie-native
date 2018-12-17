@@ -123,7 +123,7 @@ export default function reducer(state = initialState, action) {
       loading: false,
       error: action.error
     });
-  }else if (action.type === NEVER_MIND_USER_REQUEST) {
+  } else if (action.type === NEVER_MIND_USER_REQUEST) {
     return Object.assign({}, state, {
       loading: true,
       error: null

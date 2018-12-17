@@ -34,11 +34,6 @@ const StyledUsername = styled.Text`
   font-size: 17;
 `;
 
-const StyledOptionsContainer = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
 const StyledSwipeListView = styled(SwipeListView)`
   width: 100%;
 `;
@@ -112,28 +107,28 @@ export class PopcornsPage extends Component {
     super(props);
     this.state = {
       show: 'popcorn'
-    }
+    };
   }
 
   componentDidMount() {
-    this.props.dispatch(fetchPopcorn())
+    this.props.dispatch(fetchPopcorn());
   }
 
   popcorn(userId) {
     this.props.dispatch(popcornUser({ userId }))
-      .then(() => this.props.dispatch(fetchPopcorn()))
+      .then(() => this.props.dispatch(fetchPopcorn()));
   }
 
   ignore(userId) {
     this.props.dispatch(ignoreUser({ userId }))
       .then(() => this.props.dispatch(filterUser(userId)))
-      .then(() => this.props.dispatch(fetchPopcorn()))
+      .then(() => this.props.dispatch(fetchPopcorn()));
   }
 
   neverMind(userId) {
     this.props.dispatch(neverMindUser({ userId }))
       .then(() => this.props.dispatch(filterUser(userId)))
-      .then(() => this.props.dispatch(fetchPopcorn()))
+      .then(() => this.props.dispatch(fetchPopcorn()));
   }
 
   openRow(rowRef, size) {
@@ -143,12 +138,12 @@ export class PopcornsPage extends Component {
   }
 
   toggleList() {
-    let show = 'popcorn'
+    let show = 'popcorn';
     if (this.state.show === 'popcorn') {
-      show = 'pending'
+      show = 'pending';
     }
 
-    this.setState({ show })
+    this.setState({ show });
   }
 
   render() {
@@ -160,15 +155,15 @@ export class PopcornsPage extends Component {
         <StyledNotice>
           <StyledNoticeText>No popcorn</StyledNoticeText>
         </StyledNotice>
-      )
+      );
 
-      popcorn = popcorn.filter(user => !this.props.filter.includes(user._id))
+      popcorn = popcorn.filter(user => !this.props.filter.includes(user._id));
 
       if (popcorn.length) {
         popcorn = popcorn.map(user => {
           user.key = user._id;
-          return user
-        })
+          return user;
+        });
         popcornDisplay = (
           <StyledSwipeListView
             useFlatList
@@ -193,7 +188,7 @@ export class PopcornsPage extends Component {
             rightOpenValue={-150}
             previewOpenValue={.01}
           />
-        )
+        );
       }
 
       return (
@@ -212,15 +207,15 @@ export class PopcornsPage extends Component {
         <StyledNotice>
           <StyledNoticeText>No pending</StyledNoticeText>
         </StyledNotice>
-      )
+      );
 
-      pending = pending.filter(user => !this.props.filter.includes(user._id))
+      pending = pending.filter(user => !this.props.filter.includes(user._id));
 
       if (pending.length) {
         pending = pending.map(user => {
           user.key = user._id;
-          return user
-        })
+          return user;
+        });
         pendingDisplay = (
           <StyledSwipeListView
             useFlatList
@@ -242,7 +237,7 @@ export class PopcornsPage extends Component {
             rightOpenValue={-75}
             previewOpenValue={.01}
           />
-        )
+        );
       }
 
       return (
@@ -262,6 +257,6 @@ const mapStateToProps = state => ({
   popcorn: state.user.popcorn,
   pending: state.user.pending,
   filter: state.user.filter
-})
+});
 
 export default RequiresLogin()(connect(mapStateToProps)(PopcornsPage));

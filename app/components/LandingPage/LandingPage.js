@@ -6,7 +6,7 @@ import styled from 'styled-components/native';
 import RegistrationForm from './RegistrationForm';
 import LoginForm from './LoginForm';
 import { loadAuthToken } from '../../storage';
-import { setAuthToken, refreshAuthToken } from '../../actions'
+import { setAuthToken, refreshAuthToken } from '../../actions';
 
 const StyledLogo = styled.Image`
   width: 247;
@@ -48,15 +48,15 @@ class LandingPage extends Component {
   }
 
   componentDidMount() {
-    this.loadToken().catch(err => console.log(err))
+    this.loadToken().catch(err => console.log(err));
   }
 
   async loadToken() {
-    const authToken = await loadAuthToken()
+    const authToken = await loadAuthToken();
     if (authToken) {
       this.props.dispatch(setAuthToken(authToken))
         .then(this.props.dispatch(refreshAuthToken()))
-        .catch(err => console.log(err))
+        .catch(err => console.log(err));
     }
   }
 

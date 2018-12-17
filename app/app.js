@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, StatusBar} from 'react-native';
+import React, { Component } from 'react';
+import { StatusBar } from 'react-native';
 import styled from 'styled-components/native';
 import { Provider } from 'react-redux';
-import { NativeRouter as Router, Route } from 'react-router-native'
-import LandingPage from './components/LandingPage'
+import { NativeRouter as Router, Route } from 'react-router-native';
+import LandingPage from './components/LandingPage';
 import store from './store';
 import DashboardPage from './components/DashboardPage';
 import ChatsPage from './components/ChatsPage';

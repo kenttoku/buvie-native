@@ -5,7 +5,7 @@ import styled from 'styled-components/native';
 
 import RequiresLogin from '../RequiresLogin';
 import Header from '../Header';
-import { clearAuth, resetMovies, resetUser } from '../../actions'
+import { clearAuth, resetMovies, resetUser } from '../../actions';
 import { clearAuthToken } from '../../storage';
 
 const StyledSettingsPage = styled.View`

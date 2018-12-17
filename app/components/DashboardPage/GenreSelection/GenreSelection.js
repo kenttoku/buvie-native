@@ -3,8 +3,8 @@ import styled from 'styled-components/native';
 import { connect } from 'react-redux';
 
 import { updateUser } from '../../../actions';
-import StyledButtonContainer from '../../styles/StyledButtonContainer'
-import StyledButtonText from '../..//styles/StyledButtonText'
+import StyledButtonContainer from '../../styles/StyledButtonContainer';
+import StyledButtonText from '../..//styles/StyledButtonText';
 
 const StyledView = styled.View`
   display: flex;
@@ -106,7 +106,7 @@ export class GenreSelection extends Component {
         {inputs}
 
         <StyledButtonContainer
-          disabled={genres.length != 3}
+          disabled={genres.length !== 3}
           onPress={() => this.handleSubmit()}>
           <StyledButtonText>Continue</StyledButtonText>
         </StyledButtonContainer>
