@@ -24,7 +24,6 @@ const StyledSafeAreaView = styled.SafeAreaView`
 
 export default class App extends Component {
   render() {
-    console.log(Platform.OS)
     return (
       <Router>
         <Provider store={store}>

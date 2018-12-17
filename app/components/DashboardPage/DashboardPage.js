@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image } from 'react-native';
+import { Image, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import Swiper from 'react-native-swiper';
 import styled from 'styled-components/native';
@@ -27,7 +27,7 @@ const StyledMatchDisplay = styled.View`
 `;
 
 const StyledMatchPoster = styled.Image`
-  width: 300;
+  width: 90%;
   height: 444;
 `;
 
