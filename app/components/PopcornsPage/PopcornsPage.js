@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { View, FlatList, Text } from 'react-native'
 import { SwipeListView } from 'react-native-swipe-list-view';
 import { connect } from 'react-redux';
 import styled from 'styled-components/native';
+import Header from '../Header';
 
 import RequiresLogin from '../RequiresLogin';
 import { fetchPopcorn, popcornUser, ignoreUser, filterUser } from '../../actions';
@@ -11,11 +11,6 @@ const StyledPopcornPage = styled.View`
   flex: 1;
   width: 100%;
   align-items: center;
-`;
-
-const StyledHeader = styled.Text`
-  color: #fff;
-  font-size: 17;
 `;
 
 const StyledNotice = styled.View`
@@ -89,6 +84,20 @@ const RowBack = styled.View`
   justify-content: flex-end;
 `;
 
+const ToggleMenuContainer = styled.TouchableOpacity`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #A33944;
+  opacity: ${props => props.disabled ? '0.5' : '1'};
+  width: 100%;
+  height: 52;
+`;
+
+const ToggleMenuText = styled.Text`
+  color: #fff;
+  font-size: 17;
+`;
 export class PopcornsPage extends Component {
   constructor(props) {
     super(props);
@@ -117,6 +126,15 @@ export class PopcornsPage extends Component {
     if (!rowRef.isOpen) {
       rowRef.manuallySwipeRow(-150);
     }
+  }
+
+  toggleList() {
+    let show = 'popcorn'
+    if (this.state.show === 'popcorn') {
+      show = 'pending'
+    }
+
+    this.setState({ show })
   }
 
   render() {
@@ -162,38 +180,70 @@ export class PopcornsPage extends Component {
             previewOpenValue={.01}
           />
         )
-        // popcornDisplay = popcorn.map(user => {
-        //   return (
-        //     <StyledUserListItem>
-        //       <StyledUsername>{user.username}</StyledUsername>
-        //       <StyledOptionsContainer>
-        //         <StyledPopcornButtonContainer onPress={() => this.popcorn(match.id)}>
-        //           <StyledButtonText isPopcorn={true}>Popcorn</StyledButtonText>
-        //         </StyledPopcornButtonContainer>
-
-        //         <StyledIgnoreButtonContainer onPress={() => this.ignore(match.id)}>
-        //           <StyledButtonText>Ignore</StyledButtonText>
-        //         </StyledIgnoreButtonContainer>
-        //       </StyledOptionsContainer>
-        //     </StyledUserListItem>
-        //   )
-        // })
       }
 
       return (
         <StyledPopcornPage>
-          <StyledHeader> Popcorns</StyledHeader>
+          <Header heading="Popcorns" />
+          <ToggleMenuContainer onPress={() => this.toggleList()}>
+            <ToggleMenuText>Show Pending</ToggleMenuText>
+          </ToggleMenuContainer>
           {popcornDisplay}
         </StyledPopcornPage>
       );
     }
-    console.log(this.props.popcorn)
-    console.log(this.props.pending)
-    return (
-      <StyledPopcornPage>
-        <StyledHeader> Popcorns</StyledHeader>
-      </StyledPopcornPage>
-    );
+
+    if (show === 'pending') {
+      let pendingDisplay = (
+        <StyledNotice>
+          <StyledNoticeText>No pending</StyledNoticeText>
+        </StyledNotice>
+      )
+
+      pending = pending.filter(user => !this.props.filter.includes(user._id))
+
+      if (pending.length) {
+        pending = pending.map(user => {
+          user.key = user._id;
+          return user
+        })
+        pendingDisplay = (
+          <StyledSwipeListView
+            useFlatList
+            data={pending}
+            renderItem={ (data, rowMap) => (
+              <StyledUserListItem onPress={ () => this.openRow(rowMap[data.item.key], data)}>
+                <RowFront>
+                  <StyledUsername>{data.item.username}</StyledUsername>
+                </RowFront>
+              </StyledUserListItem>
+            )}
+            renderHiddenItem={ data => (
+              <RowBack>
+                <StyledPopcornButtonContainer onPress={() => this.popcorn(data.item._id)}>
+                  <StyledButtonText isPopcorn={true}>Popcorn</StyledButtonText>
+                </StyledPopcornButtonContainer>
+                <StyledIgnoreButtonContainer onPress={() => this.ignore(data.item._id)}>
+                  <StyledButtonText>Ignore</StyledButtonText>
+                </StyledIgnoreButtonContainer>
+              </RowBack>
+            )}
+            rightOpenValue={-150}
+            previewOpenValue={.01}
+          />
+        )
+      }
+
+      return (
+        <StyledPopcornPage>
+          <Header heading="Pending Popcorn" />
+          <ToggleMenuContainer onPress={() => this.toggleList()}>
+            <ToggleMenuText>Show Popcorn</ToggleMenuText>
+          </ToggleMenuContainer>
+          {pendingDisplay}
+        </StyledPopcornPage>
+      );
+    }
   }
 }
 

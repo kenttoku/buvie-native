@@ -10,6 +10,9 @@ const StyledNavigation = styled.View`
   bottom: 0;
   height: 44;
   background-color: red;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 `;
 
 export default class Navigation extends Component {
