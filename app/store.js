@@ -1,29 +1,10 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
-import { reducer as formReducer } from 'redux-form';
+import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import { authReducer, userReducer, movieReducer } from './reducers'
-// import { loadAuthToken } from './local-storage';
-// import authReducer from './reducers/auth';
-// import userReducer from './reducers/user-reducer';
-// import movieReducer from './reducers/movie-reducer';
-// import { setAuthToken, refreshAuthToken } from './actions/auth';
+import reducers from './reducers'
 
 const store = createStore(
-  combineReducers({
-    auth: authReducer,
-    form: formReducer,
-    movie: movieReducer,
-    user: userReducer
-  }),
+  reducers,
   applyMiddleware(thunk)
 );
-
-// Hydrate the authToken from localStorage if it exist
-// const authToken = loadAuthToken();
-// if (authToken) {
-//   const token = authToken;
-//   store.dispatch(setAuthToken(token));
-//   store.dispatch(refreshAuthToken());
-// }
 
 export default store;
