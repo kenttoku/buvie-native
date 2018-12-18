@@ -51,11 +51,11 @@ export class Chat extends Component {
   }
 
   onSend(data) {
-		this.state.socket.emit('chat', {
-			message: data.text,
-			handle: this.props.username,
-			room: this.state.chatroom
-		});
+    this.state.socket.emit('chat', {
+      message: data.text,
+      handle: this.props.username,
+      room: this.state.chatroom
+    });
   }
 
   render() {

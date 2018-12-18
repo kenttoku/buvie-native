@@ -90,7 +90,7 @@ export class DashboardPage extends Component {
     const { genres, movies, matches, filter, loading } = this.props;
     const matchList = matches.filter(user => !filter.includes(user.id));
 
-    if (loading && matches.length < 2) {
+    if (loading) {
       return <Spinner />;
     }
 
