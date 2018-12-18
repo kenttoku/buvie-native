@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { Image } from 'react-native';
 import { Link } from 'react-router-native';
 import styled from 'styled-components/native';
+import homeIcon from '../../assets/images/baseline_home_white_24dp.png';
+import popcornIcon from '../../assets/images/baseline_person_add_white_24dp.png';
+import chatIcon from '../../assets/images/baseline_chat_white_24dp.png';
+import settingIcon from '../../assets/images/baseline_settings_white_24dp.png';
 
 const StyledNavigationView = styled.View`
   position: absolute;
@@ -31,25 +35,25 @@ export default class Navigation extends Component {
       <StyledNavigationView>
         <Link to="/dashboard">
           <StyledLinkView>
-            <Image source={require('../../assets/images/baseline_home_white_18dp.png')} />
+            <Image source={homeIcon} />
             <StyledNavigationText>Home</StyledNavigationText>
           </StyledLinkView>
         </Link>
         <Link to="/popcorns">
           <StyledLinkView>
-            <Image source={require('../../assets/images/baseline_person_add_white_18dp.png')} />
+            <Image source={popcornIcon} />
             <StyledNavigationText>Popcorns</StyledNavigationText>
           </StyledLinkView>
         </Link>
         <Link to="/chats">
           <StyledLinkView>
-            <Image source={require('../../assets/images/baseline_chat_white_18dp.png')} />
+            <Image source={chatIcon} />
             <StyledNavigationText>Chats</StyledNavigationText>
           </StyledLinkView>
         </Link>
         <Link to="/settings">
           <StyledLinkView>
-            <Image source={require('../../assets/images/baseline_settings_white_18dp.png')} />
+            <Image source={settingIcon} />
             <StyledNavigationText>Setting</StyledNavigationText>
           </StyledLinkView>
         </Link>

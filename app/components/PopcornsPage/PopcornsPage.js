@@ -6,6 +6,7 @@ import Header from '../Header';
 
 import RequiresLogin from '../RequiresLogin';
 import { fetchPopcorn, popcornUser, ignoreUser, filterUser, neverMindUser } from '../../actions';
+import Spinner from '../Spinner';
 
 const StyledPopcornPage = styled.View`
   flex: 1;
@@ -147,8 +148,12 @@ export class PopcornsPage extends Component {
   }
 
   render() {
-    let { popcorn, pending } = this.props;
+    let { popcorn, pending, loading } = this.props;
     const { show } = this.state;
+
+    if (loading) {
+      return <Spinner />;
+    }
 
     if (show === 'popcorn') {
       let popcornDisplay = (
@@ -254,6 +259,7 @@ export class PopcornsPage extends Component {
 }
 
 const mapStateToProps = state => ({
+  loading: !!(state.auth.loading || state.user.loading || state.movie.loading),
   popcorn: state.user.popcorn,
   pending: state.user.pending,
   filter: state.user.filter

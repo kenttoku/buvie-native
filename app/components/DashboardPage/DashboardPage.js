@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Image } from 'react-native';
 import { connect } from 'react-redux';
 import Swiper from 'react-native-swiper';
 import styled from 'styled-components/native';
@@ -9,6 +8,7 @@ import MovieSelection from './MovieSelection';
 import GenreSelection from './GenreSelection';
 import RequiresLogin from '../RequiresLogin/RequiresLogin';
 import Navigation from '../Navigation';
+import Spinner from '../Spinner';
 
 const ImageContainer = styled.View`
   flex: 1;
@@ -36,12 +36,6 @@ const StyledMatchName = styled.Text`
   color: #fff;
   font-size: 34;
   margin-bottom: 16;
-`;
-
-const StyledSpinnerView = styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
 `;
 
 const StyledOptionsContainer = styled.View`
@@ -72,6 +66,7 @@ const StyledButtonText = styled.Text`
   color: ${props => props.isPopcorn ? '#fff' : '#000'};
   text-align: center;
 `;
+
 export class DashboardPage extends Component {
   componentDidMount() {
     this.props.dispatch(fetchCurrentuser())
@@ -93,15 +88,10 @@ export class DashboardPage extends Component {
 
   render() {
     const { genres, movies, matches, filter, loading } = this.props;
+    const matchList = matches.filter(user => !filter.includes(user.id));
 
-    if (loading) {
-      return (
-        <StyledSpinnerView>
-          <Image
-            source={require('../../assets/images/buvie.gif')}
-          />
-        </StyledSpinnerView>
-      );
+    if (loading && matches.length < 2) {
+      return <Spinner />;
     }
 
     if (!genres.length) {
@@ -112,7 +102,8 @@ export class DashboardPage extends Component {
       return <MovieSelection />;
     }
 
-    const match = matches.filter(user => !filter.includes(user.id))[0];
+    const showIndex = loading ? 1 : 0;
+    const match = matchList[showIndex];
 
     let matchDisplay;
     if (match) {
