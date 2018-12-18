@@ -77,11 +77,9 @@ export class Chat extends Component {
 
   render() {
     const { username, messages } = this.props
-    console.log(this.props)
-    const giftedMessages = messages.map(data => {
-      console.log('username', data.handle)
+    const giftedMessages = messages.map((data, i) => {
       return {
-        _id: data._id,
+        _id: `${data.handle}-message-${i}`,
         text: data.message,
         user: {
           _id: data.handle,
