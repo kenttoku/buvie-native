@@ -20,7 +20,17 @@ import {
   NEVER_MIND_USER_FAILURE,
   NEVER_MIND_USER_REQUEST,
   NEVER_MIND_USER_SUCCESS,
-  RESET_USER
+  RESET_USER,
+  FETCH_MATCHED_FAILURE,
+  FETCH_MATCHED_REQUEST,
+  FETCH_MATCHED_SUCCESS,
+  FETCH_MESSAGE_REQUEST,
+  FETCH_MESSAGE_SUCCESS,
+  FETCH_MESSAGE_FAILURE,
+  APPEND_MESSAGE,
+  PUT_MESSAGE_REQUEST,
+  PUT_MESSAGE_SUCCESS,
+  PUT_MESSAGE_FAILURE
 } from '../actions';
 
 const initialState = {
@@ -33,8 +43,7 @@ const initialState = {
   pending: [],
   matched: [],
   filter: [],
-  userCity: '',
-  userCoords: {},
+  messages: []
 };
 
 export default function reducer(state = initialState, action) {
@@ -133,6 +142,54 @@ export default function reducer(state = initialState, action) {
       loading: false,
     });
   } else if (action.type === NEVER_MIND_USER_FAILURE) {
+    return Object.assign({}, state, {
+      loading: false,
+      error: action.error
+    });
+  } else if (action.type === FETCH_MATCHED_REQUEST) {
+    return Object.assign({}, state, {
+      loading: true,
+      error: null
+    });
+  } else if (action.type === FETCH_MATCHED_SUCCESS) {
+    return Object.assign({}, state, {
+      loading: false,
+      matched: action.matched
+    });
+  } else if (action.type === FETCH_MATCHED_FAILURE) {
+    return Object.assign({}, state, {
+      loading: false,
+      error: action.error
+    });
+  } else if (action.type === FETCH_MESSAGE_REQUEST) {
+    return Object.assign({}, state, {
+      loading: true,
+      error: null
+    });
+  } else if (action.type === FETCH_MESSAGE_SUCCESS) {
+    return Object.assign({}, state, {
+      loading: false,
+      messages: action.messages
+    });
+  } else if (action.type === FETCH_MESSAGE_FAILURE) {
+    return Object.assign({}, state, {
+      loading: false,
+      error: action.error
+    });
+  } else if (action.type === APPEND_MESSAGE) {
+    return Object.assign({}, state, {
+      messages: [...state.messages, action.message]
+    });
+  } else if (action.type === PUT_MESSAGE_REQUEST) {
+    return Object.assign({}, state, {
+      loading: true,
+      error: null
+    });
+  } else if (action.type === PUT_MESSAGE_SUCCESS) {
+    return Object.assign({}, state, {
+      loading: false
+    });
+  } else if (action.type === PUT_MESSAGE_FAILURE) {
     return Object.assign({}, state, {
       loading: false,
       error: action.error

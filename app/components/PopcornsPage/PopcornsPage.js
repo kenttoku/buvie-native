@@ -80,7 +80,7 @@ const RowFront = styled.View`
 `;
 
 const RowBack = styled.View`
-	align-items: center;
+  align-items: center;
   background-color: #212032;
   flex: 1;
   flex-direction: row;
