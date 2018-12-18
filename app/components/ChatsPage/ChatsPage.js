@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components/native';
 import Header from '../Header';
 import RequiresLogin from '../RequiresLogin';
-import { fetchMatched } from '../../actions';
+import { fetchMatched, resetMessage } from '../../actions';
 import Chat from './Chat';
 import Spinner from '../Spinner';
 
@@ -72,10 +72,12 @@ export class ChatsPage extends Component {
       user: null,
       room: null
     })
+    this.props.dispatch(resetMessage())
   }
 
   render() {
     const { matched } = this.props
+
     const { chat, user, room } = this.state
     let chats
     if (matched.matched) {
@@ -111,7 +113,6 @@ export class ChatsPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  loading: !!(state.auth.loading || state.user.loading || state.movie.loading),
   matched: state.user.matched
 })
 

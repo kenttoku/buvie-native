@@ -344,7 +344,6 @@ export const fetchMatched = () => (dispatch, getState) => {
     .then(res => res.json())
     .then(res => {
       dispatch(fetchMatchedSuccess(res));
-      return res
     })
     .catch(err => dispatch(fetchMatchedFailure(err)));
 };
@@ -385,6 +384,12 @@ export const fetchMessages = chatroomId => (dispatch, getState) => {
 export const APPEND_MESSAGE = 'APPEND_MESSAGE';
 export const appendMessage = message => ({
   type: APPEND_MESSAGE,
+  message
+});
+
+export const RESET_MESSAGE = 'RESET_MESSAGE';
+export const resetMessage = message => ({
+  type: RESET_MESSAGE,
   message
 });
 

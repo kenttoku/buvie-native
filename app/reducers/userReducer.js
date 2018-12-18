@@ -28,6 +28,7 @@ import {
   FETCH_MESSAGE_SUCCESS,
   FETCH_MESSAGE_FAILURE,
   APPEND_MESSAGE,
+  RESET_MESSAGE,
   PUT_MESSAGE_REQUEST,
   PUT_MESSAGE_SUCCESS,
   PUT_MESSAGE_FAILURE
@@ -179,6 +180,10 @@ export default function reducer(state = initialState, action) {
   } else if (action.type === APPEND_MESSAGE) {
     return Object.assign({}, state, {
       messages: [...state.messages, action.message]
+    });
+  } else if (action.type === RESET_MESSAGE) {
+    return Object.assign({}, state, {
+      messages: []
     });
   } else if (action.type === PUT_MESSAGE_REQUEST) {
     return Object.assign({}, state, {
